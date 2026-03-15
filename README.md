@@ -12,11 +12,11 @@
  - React-testing-library: Permite hacer que los tests se comporten igual que lo haría un usuario interactuando con el naveegador, lo que hace que los test sean robustos frente a cambios en las estructuras del código y a la par son más reales y permite hacer testing de la accesibilidad de la aplicación.
  - Mocks de servidor: MSW, ligero, sencillo de usar y al usar los service worker para interceptar los fetch las llamadas aparecen en el tab de network de las devtools, lo que facilita el debugging. Añadimos msw/data y Faker para crear los datos mock.
  - Decido usar ESLint en lugar de las alternativas analizadas puesto que no veo sentido para una prueba las fricciones que puede suponer nuevas tecnologías, sobre todo teniendo en cuenta que el boilerplate que añade la plantilla de aplicación de vite ya lo integra.
+ - Para peticiones tanstack-query: tal vez es demasiado para un proyecto pequeño como esta prueba y con un fetch sin nada podríamos avanzar sin problemas, pero no añade mucho overhead y aporta comodidad y ya estaría preparado el proyecto para evolucionar. SWR ofrece características muy similares en un bundle más pequeño, pero para la prueba el tamaño del bundle no es determinante y si mal no recuerdo en myinvestor ya usaban tanstack-query por lo que es un buen entrenamiento.
+ - Para la tabla tanstack-table: filosofía headless, lo que nos permite implementarla en el framework que queramos puesto que solo se ocupa de la gestión de los datos, una librería para la gestión de la tabla me parece importante puesto que ya he lidiado con problemas a la hora de trabajar con tablas custom.
+ - Test E2E: Playwright, herramienta algo más moderna que Cypress, con mejor rendimiento en mi experiencia y el uso es muy similar y aunque no tengo tanta experiencia como con Cypress no espero muchos bloqueos.
  
  Por evaluar:
- - Que librería para peticiones usar: tanstack-query o swr.
- - Será necesario storybook?
- - Test E2E: Cypress o Playwrigth
  - Que usar para el swipe?
  - Para los formularios, será necesario una librería como React Hook form o son suficientemente sencillos como para que typescript + useFormStatus sea suficiente, usamos Zod para comprobar esquemas o typescript ya será suficiente?
  - Gestion de la tabla, parece que no necesitaré virtualizar, pero tal vez es interesante poder tener modo de tabla infinita, parece que myinvestor tiene tabla infinita con carga con scroll.
