@@ -16,6 +16,7 @@
 - Para peticiones tanstack-query: tal vez es demasiado para un proyecto pequeño como esta prueba y con un fetch sin nada podríamos avanzar sin problemas, pero no añade mucho overhead y aporta comodidad y ya estaría preparado el proyecto para evolucionar. SWR ofrece características muy similares en un bundle más pequeño, pero para la prueba el tamaño del bundle no es determinante y si mal no recuerdo en myinvestor ya usaban tanstack-query por lo que es un buen entrenamiento.
 - Para la tabla tanstack-table: filosofía headless, lo que nos permite implementarla en el framework que queramos puesto que solo se ocupa de la gestión de los datos, una librería para la gestión de la tabla me parece importante puesto que ya he lidiado con problemas a la hora de trabajar con tablas custom.
 - Test E2E: Playwright, herramienta algo más moderna que Cypress, con mejor rendimiento en mi experiencia y el uso es muy similar y aunque no tengo tanta experiencia como con Cypress no espero muchos bloqueos.
+- React-i18next: internacionalización de los textos
 
 Por evaluar:
 

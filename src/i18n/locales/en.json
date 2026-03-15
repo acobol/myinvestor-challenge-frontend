@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "funds": "Funds",
+    "portfolio": "Portfolio"
+  },
+  "funds": {
+    "title": "Investment Funds"
+  },
+  "portfolio": {
+    "title": "My Portfolio"
+  }
+}
