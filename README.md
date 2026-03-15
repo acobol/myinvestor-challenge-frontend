@@ -21,6 +21,8 @@
  - Para los formularios, será necesario una librería como React Hook form o son suficientemente sencillos como para que typescript + useFormStatus sea suficiente, usamos Zod para comprobar esquemas o typescript ya será suficiente?
  - Gestion de la tabla, parece que no necesitaré virtualizar, pero tal vez es interesante poder tener modo de tabla infinita, parece que myinvestor tiene tabla infinita con carga con scroll.
  - Hacer test de mutación? Tal vez una vez finalizado todo lo principal.
+ - Añadir CI
+ - Si se añade CI un hook pre commit para asegurarse de que los mensajes de commit cumplen estaría bien. No prioritario
  
 ### Arquitectura
 
