@@ -6,8 +6,8 @@ import {
   CurrencySchema,
   type Fund,
   type FundCategory,
-} from "@/domain/fund/fund.schema";
-import { PortfolioItemSchema } from "@/domain/portfolio/portfolio.schema";
+} from "@/fund/domain/fund.schema";
+import { PortfolioItemSchema } from "@/portfolio/domain/portfolio.schema";
 
 // ---- Collections ----
 

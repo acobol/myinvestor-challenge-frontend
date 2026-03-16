@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CurrencySchema } from "../fund/fund.schema";
+import { CurrencySchema } from "@/fund/domain/fund.schema";
 
 export const PortfolioItemSchema = z.object({
   id: z.string(),

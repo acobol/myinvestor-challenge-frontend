@@ -1,8 +1,8 @@
 import { http, HttpResponse } from "msw";
 import { fundsDb, portfolioDb } from "./data";
-import type { FundsQuery } from "@/domain/fund/fund.schema";
-import { FundsQuerySchema } from "@/domain/fund/fund.schema";
-import type { PortfolioItem } from "@/domain/portfolio/portfolio.schema";
+import type { FundsQuery } from "@/fund/domain/fund.schema";
+import { FundsQuerySchema } from "@/fund/domain/fund.schema";
+import type { PortfolioItem } from "@/portfolio/domain/portfolio.schema";
 
 const BASE = "http://localhost:3000";
 

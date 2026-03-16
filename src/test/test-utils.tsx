@@ -26,4 +26,4 @@ function customRender(ui: ReactElement, options?: RenderOptions) {
 }
 
 export * from "@testing-library/react";
-export { customRender as render };
+export { customRender as render, AllProviders as wrapper };

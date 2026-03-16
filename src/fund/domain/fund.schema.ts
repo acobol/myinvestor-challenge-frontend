@@ -62,6 +62,7 @@ export const TransferRequestSchema = z.object({
 
 export type Fund = z.infer<typeof FundSchema>;
 export type FundsQuery = z.infer<typeof FundsQuerySchema>;
+export type FundsResponse = z.infer<typeof FundsResponseSchema>;
 export type BuySellRequest = z.infer<typeof BuySellRequestSchema>;
 export type TransferRequest = z.infer<typeof TransferRequestSchema>;
 
