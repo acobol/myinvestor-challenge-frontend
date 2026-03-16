@@ -4,7 +4,27 @@
     "portfolio": "Cartera"
   },
   "funds": {
-    "title": "Fondos de inversión"
+    "title": "Fondos de inversión",
+    "loading": "Cargando fondos...",
+    "error": "No se pudieron cargar los fondos. Inténtalo de nuevo.",
+    "retry": "Reintentar",
+    "columns": {
+      "name": "Nombre",
+      "symbol": "Símbolo",
+      "category": "Categoría",
+      "value": "Valor",
+      "currency": "Divisa",
+      "ytd": "YTD",
+      "oneYear": "1 Año",
+      "threeYears": "3 Años",
+      "fiveYears": "5 Años"
+    },
+    "categories": {
+      "GLOBAL": "Global",
+      "TECH": "Tecnología",
+      "HEALTH": "Salud",
+      "MONEY_MARKET": "Mercado Monetario"
+    }
   },
   "portfolio": {
     "title": "Mi cartera"

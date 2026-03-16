@@ -4,7 +4,27 @@
     "portfolio": "Portfolio"
   },
   "funds": {
-    "title": "Investment Funds"
+    "title": "Investment Funds",
+    "loading": "Loading funds...",
+    "error": "Failed to load funds. Please try again.",
+    "retry": "Retry",
+    "columns": {
+      "name": "Name",
+      "symbol": "Symbol",
+      "category": "Category",
+      "value": "Value",
+      "currency": "Currency",
+      "ytd": "YTD",
+      "oneYear": "1 Year",
+      "threeYears": "3 Years",
+      "fiveYears": "5 Years"
+    },
+    "categories": {
+      "GLOBAL": "Global",
+      "TECH": "Technology",
+      "HEALTH": "Health",
+      "MONEY_MARKET": "Money Market"
+    }
   },
   "portfolio": {
     "title": "My Portfolio"

@@ -20,7 +20,7 @@
 
 Por evaluar:
 
-- Que usar para el swipe?
+- Que usar para el swipe? Por consistencia tal vez el swipe en mobile también se puede añadir en la tabla de fondos y no solo en la de cartera como dice la prueba
 - Para los formularios, será necesario una librería como React Hook form o son suficientemente sencillos como para que typescript + useFormStatus sea suficiente, usamos Zod para comprobar esquemas o typescript ya será suficiente?
 - Gestion de la tabla, parece que no necesitaré virtualizar, pero tal vez es interesante poder tener modo de tabla infinita, parece que myinvestor tiene tabla infinita con carga con scroll.
 - Hacer test de mutación? Tal vez una vez finalizado todo lo principal.
@@ -31,3 +31,11 @@ Por evaluar:
 
 - Las acciones sobre los fondos se encuentran en el dominio del portfolio, la razón de esto es que aunque el recurso del api REST es /funds lo que se modifica es el portfolio, por lo que considero que es un lugar con más sentido en nuestra aplicación.
 - Arquitectura Hexagonal + Domain Driven Design: cada feature está separada y tiene su extrauctura de arquitectura hexagonal, de esta forma siempre que se quiere acceder a algo el orden de resolución es simple, buscar el dominio del que se necesita un recurso y luego buscar por el tipo de recurso según la arquitectura hexagonal.
+
+### Features
+
+#### Fondos
+
+- La tabla con header sticky, siempre tenenemos acceso al significado de cada columna
+- La columna con el nombre también es sticky en el scroll horizontal, para saber siempre a que fondo corresponden los datos.
+- En FundsTable.tsx hay dos componentes en lugar de solo uno, puesto que el componente de celda es auxiliar y el archivo es pequeño puede estar contenido ahí, si el archivo creciese o existiese la necesidad de reusar el componente se puede extraer fácilmente.
