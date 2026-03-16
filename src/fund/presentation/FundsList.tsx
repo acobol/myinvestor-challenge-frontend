@@ -1,6 +1,9 @@
+import { useState } from "react";
+import type { SortingState } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 import { useFunds } from "@/fund/application/useFunds";
 import { usePagination } from "@/shared/application/usePagination";
+import { toApiSort } from "@/fund/application/fund.sort-utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageSizeSelector, TablePagination } from "@/components/TablePagination";
@@ -12,7 +15,17 @@ const SKELETON_COLS = 9;
 export function FundsList() {
   const { t } = useTranslation();
   const { page, pageSize, setPage, setPageSize } = usePagination(10);
-  const { data, isLoading, isError, refetch } = useFunds({ page, limit: pageSize });
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const { data, isLoading, isError, refetch } = useFunds({
+    page,
+    limit: pageSize,
+    sort: toApiSort(sorting),
+  });
+
+  function handleSortingChange(updater: SortingState | ((prev: SortingState) => SortingState)) {
+    setSorting(updater);
+    setPage(1);
+  }
 
   if (isLoading) {
     return (
@@ -80,7 +93,11 @@ export function FundsList() {
         />
       </CardHeader>
       <CardContent>
-        <FundsTable data={data?.data ?? []} />
+        <FundsTable
+          data={data?.data ?? []}
+          sorting={sorting}
+          onSortingChange={handleSortingChange}
+        />
         <TablePagination
           page={page}
           totalPages={totalPages}
