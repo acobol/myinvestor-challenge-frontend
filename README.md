@@ -31,6 +31,7 @@ Por evaluar:
 
 - Las acciones sobre los fondos se encuentran en el dominio del portfolio, la razón de esto es que aunque el recurso del api REST es /funds lo que se modifica es el portfolio, por lo que considero que es un lugar con más sentido en nuestra aplicación.
 - Arquitectura Hexagonal + Domain Driven Design: cada feature está separada y tiene su extrauctura de arquitectura hexagonal, de esta forma siempre que se quiere acceder a algo el orden de resolución es simple, buscar el dominio del que se necesita un recurso y luego buscar por el tipo de recurso según la arquitectura hexagonal.
+- Añadidas unas devtools que permiten manipular el comportamiento de MSW en el navegadorr, de forma que podemos invalidar caches, y simular errores sin cambiar código.
 
 ### Features
 

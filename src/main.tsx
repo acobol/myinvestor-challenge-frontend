@@ -15,6 +15,12 @@ async function enableMocking() {
     import("./mocks/data"),
   ]);
   await seedDatabase();
+  try {
+    const state = JSON.parse(localStorage.getItem("msw-dev-tools") ?? "{}") as {
+      mswDisabled?: boolean;
+    };
+    if (state.mswDisabled) return;
+  } catch { /* ignore */ }
   return worker.start({ onUnhandledRequest: "bypass" });
 }
 
