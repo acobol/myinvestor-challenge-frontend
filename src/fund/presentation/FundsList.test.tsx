@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import { http, HttpResponse } from "msw";
 import { render, screen, waitFor } from "@/test/test-utils";
 import { server } from "@/mocks/server";
-import { fundsDb } from "@/mocks/data";
 import i18n from "@/i18n";
 import { FundsList } from "./FundsList";
 
@@ -63,15 +62,23 @@ describe("FundsList", () => {
       expect(screen.getByText(t("funds.columns.fiveYears"))).toBeInTheDocument();
     });
 
-    it("renders a row for every fund returned by the API", async () => {
+    it("renders one page of funds (default 10 per page)", async () => {
       render(<FundsList />);
 
       await waitFor(() => expect(screen.queryByRole("status")).not.toBeInTheDocument());
 
-      const totalFunds = fundsDb.all().length;
       const headerRows = 1;
       const rows = screen.getAllByRole("row");
-      expect(rows).toHaveLength(totalFunds + headerRows);
+      expect(rows).toHaveLength(10 + headerRows);
+    });
+
+    it("shows pagination controls after loading", async () => {
+      render(<FundsList />);
+
+      await waitFor(() => expect(screen.queryByRole("status")).not.toBeInTheDocument());
+
+      expect(screen.getByRole("navigation", { name: /pagination/i })).toBeInTheDocument();
+      expect(screen.getByLabelText(t("common.pagination.perPage"))).toBeInTheDocument();
     });
   });
 });

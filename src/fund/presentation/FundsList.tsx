@@ -1,16 +1,18 @@
 import { useTranslation } from "react-i18next";
 import { useFunds } from "@/fund/application/useFunds";
+import { usePagination } from "@/shared/application/usePagination";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageSizeSelector, TablePagination } from "@/components/TablePagination";
 import { FundsTable } from "./FundsTable";
 
-const ALL_FUNDS_LIMIT = 100;
-const SKELETON_ROWS = 8;
+const SKELETON_ROWS = 10;
 const SKELETON_COLS = 9;
 
 export function FundsList() {
   const { t } = useTranslation();
-  const { data, isLoading, isError, refetch } = useFunds({ limit: ALL_FUNDS_LIMIT });
+  const { page, pageSize, setPage, setPageSize } = usePagination(10);
+  const { data, isLoading, isError, refetch } = useFunds({ page, limit: pageSize });
 
   if (isLoading) {
     return (
@@ -66,13 +68,24 @@ export function FundsList() {
     );
   }
 
+  const totalPages = data?.pagination.totalPages ?? 1;
+
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{t("funds.title")}</CardTitle>
+        <PageSizeSelector
+          pageSize={pageSize}
+          onPageSizeChange={setPageSize}
+        />
       </CardHeader>
       <CardContent>
         <FundsTable data={data?.data ?? []} />
+        <TablePagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </CardContent>
     </Card>
   );

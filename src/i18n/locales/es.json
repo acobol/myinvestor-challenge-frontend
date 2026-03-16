@@ -28,5 +28,13 @@
   },
   "portfolio": {
     "title": "Mi cartera"
+  },
+  "common": {
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "of": "de",
+      "perPage": "Por página"
+    }
   }
 }

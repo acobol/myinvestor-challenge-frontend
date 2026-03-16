@@ -28,5 +28,13 @@
   },
   "portfolio": {
     "title": "My Portfolio"
+  },
+  "common": {
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "of": "of",
+      "perPage": "Per page"
+    }
   }
 }
