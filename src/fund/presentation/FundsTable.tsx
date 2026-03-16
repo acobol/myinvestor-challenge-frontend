@@ -93,7 +93,7 @@ export function FundsTable({ data }: FundsTableProps) {
   const table = useReactTable({ data, columns, getCoreRowModel: getCoreRowModel() });
 
   return (
-    <div className="overflow-auto rounded-md border max-h-[70vh]">
+    <div className="overflow-auto rounded-xl max-h-[70vh]">
       <table className="w-full caption-bottom text-sm">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

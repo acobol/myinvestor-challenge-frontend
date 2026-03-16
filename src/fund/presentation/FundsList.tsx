@@ -1,8 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useFunds } from "@/fund/application/useFunds";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { FundsTable } from "./FundsTable";
 
 const ALL_FUNDS_LIMIT = 100;
+const SKELETON_ROWS = 8;
+const SKELETON_COLS = 9;
 
 export function FundsList() {
   const { t } = useTranslation();
@@ -10,34 +14,38 @@ export function FundsList() {
 
   if (isLoading) {
     return (
-      <div
-        role="status"
-        aria-label={t("funds.loading")}
-        className="flex items-center justify-center py-16 text-muted-foreground"
-      >
-        <svg
-          aria-hidden="true"
-          className="mr-2 h-5 w-5 animate-spin"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            className="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            strokeWidth="4"
-          />
-          <path
-            className="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-          />
-        </svg>
-        <span>{t("funds.loading")}</span>
-      </div>
+      <Card role="status">
+          <span className="sr-only">{t("funds.loading")}</span>
+        <CardHeader>
+          <Skeleton className="h-5 w-40" />
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-auto rounded-b-xl">
+            <table className="w-full text-sm">
+              <thead>
+                <tr>
+                  {Array.from({ length: SKELETON_COLS }).map((_, i) => (
+                    <th key={i} className="px-4 py-3">
+                      <Skeleton className="h-4 w-16" />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: SKELETON_ROWS }).map((_, row) => (
+                  <tr key={row} className="border-t">
+                    {Array.from({ length: SKELETON_COLS }).map((_, col) => (
+                      <td key={col} className="px-4 py-3">
+                        <Skeleton className="h-4 w-20" />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
     );
   }
 
@@ -58,5 +66,14 @@ export function FundsList() {
     );
   }
 
-  return <FundsTable data={data?.data ?? []} />;
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>{t("funds.title")}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <FundsTable data={data?.data ?? []} />
+      </CardContent>
+    </Card>
+  );
 }
