@@ -17,7 +17,12 @@
       "ytd": "YTD",
       "oneYear": "1 Year",
       "threeYears": "3 Years",
-      "fiveYears": "5 Years"
+      "fiveYears": "5 Years",
+      "actions": "Actions"
+    },
+    "actions": {
+      "buy": "Buy",
+      "seeDetails": "See details"
     },
     "categories": {
       "GLOBAL": "Global",

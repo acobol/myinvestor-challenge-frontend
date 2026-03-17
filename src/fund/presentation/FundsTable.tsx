@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-table";
 import type { OnChangeFn, SortingState } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
+import { ArrowRightToLine, Eye, EllipsisVertical } from "lucide-react";
 import type { Fund } from "@/fund/domain/fund.schema";
 import {
   TableBody,
@@ -15,6 +16,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { SortIcon } from "@/components/SortIcon";
 import { formatAmount, formatPercent } from "./fund.formatters";
@@ -33,9 +41,11 @@ interface FundsTableProps {
   data: Fund[];
   sorting: SortingState;
   onSortingChange: OnChangeFn<SortingState>;
+  onBuy: (fund: Fund) => void;
+  onSeeDetails: (fund: Fund) => void;
 }
 
-export function FundsTable({ data, sorting, onSortingChange }: FundsTableProps) {
+export function FundsTable({ data, sorting, onSortingChange, onBuy, onSeeDetails }: FundsTableProps) {
   const { t, i18n } = useTranslation();
 
   const columns = useMemo(
@@ -99,8 +109,32 @@ export function FundsTable({ data, sorting, onSortingChange }: FundsTableProps) 
         ),
         sortDescFirst: true
       }),
+      columnHelper.display({
+        id: "actions",
+        header: () => t("funds.columns.actions"),
+        enableSorting: false,
+        cell: ({ row }) => (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="icon" variant="ghost" aria-label={t("funds.columns.actions")}>
+                <EllipsisVertical />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => onBuy(row.original)}>
+                <ArrowRightToLine />
+                {t("funds.actions.buy")}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onSeeDetails(row.original)}>
+                <Eye />
+                {t("funds.actions.seeDetails")}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ),
+      }),
     ],
-    [t, i18n.language],
+    [t, i18n.language, onBuy, onSeeDetails],
   );
 
   const table = useReactTable({

@@ -164,6 +164,32 @@ describe("FundsList", () => {
     });
   });
 
+  describe("actions column", () => {
+    it("renders an actions column header", async () => {
+      await renderAndWait();
+
+      expect(screen.getByText(t("funds.columns.actions"))).toBeInTheDocument();
+    });
+
+    it("renders an actions trigger button in each row", async () => {
+      await renderAndWait();
+
+      const triggers = screen.getAllByRole("button", { name: t("funds.columns.actions") });
+      expect(triggers).toHaveLength(10);
+    });
+
+    it("opens a dropdown with Buy and See details items on trigger click", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("funds.columns.actions") });
+      await user.click(firstTrigger);
+
+      expect(screen.getByRole("menuitem", { name: t("funds.actions.buy") })).toBeInTheDocument();
+      expect(screen.getByRole("menuitem", { name: t("funds.actions.seeDetails") })).toBeInTheDocument();
+    });
+  });
+
   describe("sorting", () => {
     it("sortable column headers render as buttons", async () => {
       await renderAndWait();
@@ -220,14 +246,13 @@ describe("FundsList", () => {
       await waitFor(() => {
         const names = getNameCells();
         expect(names.length).toBeGreaterThan(0);
-        expect(names[0] <= names[names.length - 1]).toBe(true);
+        expect(names[0] >= names[names.length - 1]).toBe(true);
       });
 
       // Second click — ascending sort
       await user.click(nameButtonQuery());
       await waitFor(() => {
         const names = getNameCells();
-        console.log(names);
         expect(names.length).toBeGreaterThan(0);
         // in ascending order, the first name comes before the last alphabetically (A→Z)
         expect(names[0] <= names[names.length - 1]).toBe(true);

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { SortingState } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
+import type { Fund } from "@/fund/domain/fund.schema";
 import { useFunds } from "@/fund/application/useFunds";
 import { usePagination } from "@/shared/application/usePagination";
 import { toApiSort } from "@/fund/application/fund.sort-utils";
@@ -10,7 +11,7 @@ import { PageSizeSelector, TablePagination } from "@/components/TablePagination"
 import { FundsTable } from "./FundsTable";
 
 const SKELETON_ROWS = 10;
-const SKELETON_COLS = 9;
+const SKELETON_COLS = 10;
 
 export function FundsList() {
   const { t } = useTranslation();
@@ -26,6 +27,15 @@ export function FundsList() {
     setSorting(updater);
     setPage(1);
   }
+
+  const handleBuy = useCallback((_fund: Fund) => {
+    // TODO: open buy flow (portfolio domain)
+  }, []);
+
+  const handleSeeDetails = useCallback((_fund: Fund) => {
+    // TODO: navigate to fund detail page, this is not required in the challenge, but we can keep it and delete if
+    // there is no time to implement it
+  }, []);
 
   if (isLoading) {
     return (
@@ -97,6 +107,8 @@ export function FundsList() {
           data={data?.data ?? []}
           sorting={sorting}
           onSortingChange={handleSortingChange}
+          onBuy={handleBuy}
+          onSeeDetails={handleSeeDetails}
         />
         <TablePagination
           page={page}
