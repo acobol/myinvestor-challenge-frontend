@@ -17,11 +17,11 @@
 - Para la tabla tanstack-table: filosofía headless, lo que nos permite implementarla en el framework que queramos puesto que solo se ocupa de la gestión de los datos, una librería para la gestión de la tabla me parece importante puesto que ya he lidiado con problemas a la hora de trabajar con tablas custom.
 - Test E2E: Playwright, herramienta algo más moderna que Cypress, con mejor rendimiento en mi experiencia y el uso es muy similar y aunque no tengo tanta experiencia como con Cypress no espero muchos bloqueos.
 - React-i18next: internacionalización de los textos
+- React hook form para los formularios con zod: ligera, API sencilla, muchas features y con muy buen rendimiento.
 
 Por evaluar:
 
 - Que usar para el swipe? Por consistencia tal vez el swipe en mobile también se puede añadir en la tabla de fondos y no solo en la de cartera como dice la prueba
-- Para los formularios, será necesario una librería como React Hook form o son suficientemente sencillos como para que typescript + useFormStatus sea suficiente, usamos Zod para comprobar esquemas o typescript ya será suficiente?
 - Hacer test de mutación? Tal vez una vez finalizado todo lo principal.
 - Añadir CI
 - Si se añade CI un hook pre commit para asegurarse de que los mensajes de commit cumplen estaría bien. No prioritario
@@ -40,3 +40,4 @@ Por evaluar:
 - La tabla con header sticky, siempre tenenemos acceso al significado de cada columna
 - La columna con el nombre también es sticky en el scroll horizontal, para saber siempre a que fondo corresponden los datos.
 - En FundsTable.tsx hay dos componentes en lugar de solo uno, puesto que el componente de celda es auxiliar y el archivo es pequeño puede estar contenido ahí, si el archivo creciese o existiese la necesidad de reusar el componente se puede extraer fácilmente.
+- Asumo que el usuario siempre compra en euros, hago conversión en los fondos que tienen dolares como divisa.

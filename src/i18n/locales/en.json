@@ -32,7 +32,22 @@
     }
   },
   "portfolio": {
-    "title": "My Portfolio"
+    "title": "My Portfolio",
+    "buy": {
+      "title": "Buy Fund",
+      "amountLabel": "Amount (€)",
+      "unitsPreview": "You will receive approximately {{units}} units",
+      "conversionNote": "EUR/USD exchange rate applied: {{rate}}",
+      "submit": "Buy",
+      "submitting": "Buying...",
+      "cancel": "Cancel",
+      "error": "Failed to complete purchase. Please try again.",
+      "validation": {
+        "positive": "Amount must be greater than 0",
+        "max": "Maximum amount is €10,000",
+        "invalid": "Please enter a valid amount"
+      }
+    }
   },
   "common": {
     "pagination": {

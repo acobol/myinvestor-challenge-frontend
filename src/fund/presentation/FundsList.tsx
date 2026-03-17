@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageSizeSelector, TablePagination } from "@/components/TablePagination";
 import { FundsTable } from "./FundsTable";
+import { BuyFundDialog } from "./BuyFundDialog";
 
 const SKELETON_ROWS = 10;
 const SKELETON_COLS = 10;
@@ -17,6 +18,7 @@ export function FundsList() {
   const { t } = useTranslation();
   const { page, pageSize, setPage, setPageSize } = usePagination(10);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [buyFund, setBuyFund] = useState<Fund | null>(null);
   const { data, isLoading, isError, refetch } = useFunds({
     page,
     limit: pageSize,
@@ -28,11 +30,9 @@ export function FundsList() {
     setPage(1);
   }
 
-  const handleBuy = useCallback((_fund: Fund) => {
-    // TODO: open buy flow (portfolio domain)
-  }, []);
+  const handleBuy = useCallback((fund: Fund) => setBuyFund(fund), []);
 
-  const handleSeeDetails = useCallback((_fund: Fund) => {
+  const handleSeeDetails = useCallback(() => {
     // TODO: navigate to fund detail page, this is not required in the challenge, but we can keep it and delete if
     // there is no time to implement it
   }, []);
@@ -116,6 +116,7 @@ export function FundsList() {
           onPageChange={setPage}
         />
       </CardContent>
+      <BuyFundDialog fund={buyFund} onClose={() => setBuyFund(null)} />
     </Card>
   );
 }

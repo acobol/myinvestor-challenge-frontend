@@ -32,7 +32,22 @@
     }
   },
   "portfolio": {
-    "title": "Mi cartera"
+    "title": "Mi cartera",
+    "buy": {
+      "title": "Comprar fondo",
+      "amountLabel": "Importe (€)",
+      "unitsPreview": "Recibirás aproximadamente {{units}} participaciones",
+      "conversionNote": "Tipo de cambio EUR/USD aplicado: {{rate}}",
+      "submit": "Comprar",
+      "submitting": "Comprando...",
+      "cancel": "Cancelar",
+      "error": "Error al realizar la compra. Inténtalo de nuevo.",
+      "validation": {
+        "positive": "El importe debe ser mayor que 0",
+        "max": "El importe máximo es 10.000 €",
+        "invalid": "Introduce un importe válido"
+      }
+    }
   },
   "common": {
     "pagination": {
