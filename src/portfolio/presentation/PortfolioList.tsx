@@ -1,9 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_CATEGORIES } from "@/fund/domain/fund.constants";
 import { usePortfolio } from "@/portfolio/application/usePortfolio";
+import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { BuyFundDialog } from "@/fund/presentation/BuyFundDialog";
 import { PortfolioGroup } from "./PortfolioGroup";
 
 const SKELETON_GROUPS = 2;
@@ -12,6 +14,7 @@ const SKELETON_ITEMS = 3;
 export function PortfolioList() {
   const { t } = useTranslation();
   const { data, isLoading, isError, refetch } = usePortfolio();
+  const [buyPosition, setBuyPosition] = useState<PortfolioPosition | null>(null);
 
   const noop = useCallback(() => {}, []);
 
@@ -66,27 +69,31 @@ export function PortfolioList() {
   })).filter((g) => g.items.length > 0);
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{t("portfolio.title")}</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0 pb-2">
-        {groups.length === 0 ? (
-          <p className="py-10 text-center text-sm text-muted-foreground">{t("portfolio.empty")}</p>
-        ) : (
-          groups.map(({ category, items }) => (
-            <PortfolioGroup
-              key={category}
-              category={category}
-              items={items}
-              onBuy={noop}
-              onSell={noop}
-              onTransfer={noop}
-              onSeeDetails={noop}
-            />
-          ))
-        )}
-      </CardContent>
-    </Card>
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("portfolio.title")}</CardTitle>
+        </CardHeader>
+        <CardContent className="p-0 pb-2">
+          {groups.length === 0 ? (
+            <p className="py-10 text-center text-sm text-muted-foreground">{t("portfolio.empty")}</p>
+          ) : (
+            groups.map(({ category, items }) => (
+              <PortfolioGroup
+                key={category}
+                category={category}
+                items={items}
+                onBuy={setBuyPosition}
+                onSell={noop}
+                onTransfer={noop}
+                onSeeDetails={noop}
+              />
+            ))
+          )}
+        </CardContent>
+      </Card>
+
+      <BuyFundDialog fund={buyPosition} onClose={() => setBuyPosition(null)} />
+    </>
   );
 }

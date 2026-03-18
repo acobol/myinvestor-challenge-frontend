@@ -27,6 +27,7 @@ export const portfolioHttpRepository: PortfolioRepository = {
           ...item,
           symbol: fund.symbol,
           category: fund.category,
+          value: fund.value,
           profitability: fund.profitability,
         } satisfies PortfolioPosition;
       }),
