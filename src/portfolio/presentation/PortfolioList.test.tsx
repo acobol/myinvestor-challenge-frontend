@@ -1,4 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
+
+// Simulate desktop viewport so the dropdown is rendered (swipe is mobile-only)
+vi.mock("@/shared/application/useMediaQuery", () => ({ useMediaQuery: () => true }));
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";

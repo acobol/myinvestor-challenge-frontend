@@ -5,10 +5,14 @@ import { server } from "@/mocks/server";
 import { seedDatabase } from "@/mocks/data";
 
 // Sonner uses matchMedia for dark-mode detection; jsdom does not implement it.
-window.matchMedia = window.matchMedia ?? (() => ({
+window.matchMedia = window.matchMedia ?? ((query: string) => ({
   matches: false,
+  media: query,
+  addEventListener: () => {},
+  removeEventListener: () => {},
   addListener: () => {},
   removeListener: () => {},
+  dispatchEvent: () => false,
 })) as typeof window.matchMedia;
 
 // Radix UI uses pointer capture and scroll APIs that jsdom does not implement.

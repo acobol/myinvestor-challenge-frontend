@@ -8,6 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SwipeableRow } from "@/components/SwipeableRow";
+import type { SwipeAction } from "@/components/SwipeableRow";
+import { useMediaQuery } from "@/shared/application/useMediaQuery";
 import { cn } from "@/lib/utils";
 import { formatCurrency, formatPercent } from "@/fund/presentation/fund.formatters";
 import { toEur, formatBenefit } from "./portfolio.formatters";
@@ -22,6 +25,7 @@ interface PortfolioItemRowProps {
 
 export function PortfolioItemRow({ position, onBuy, onSell, onTransfer, onSeeDetails }: PortfolioItemRowProps) {
   const { t, i18n } = useTranslation();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const { totalValue, profitability } = position;
 
   const totalEur = toEur(totalValue.amount, totalValue.currency);
@@ -36,52 +40,83 @@ export function PortfolioItemRow({ position, onBuy, onSell, onTransfer, onSeeDet
       ? "text-red-500"
       : "text-muted-foreground";
 
-  return (
-    <div className="flex items-center gap-3 px-4 py-3">
-      <div className="flex flex-1 items-center gap-2 min-w-0">
-        <ChartLine size={15} className="shrink-0 text-muted-foreground" />
-        <span className="truncate text-sm font-medium">{position.name}</span>
-      </div>
+  const swipeActions: SwipeAction[] = [
+    {
+      label: t("portfolio.actions.buy"),
+      icon: <ArrowRightToLine size={16} />,
+      onClick: onBuy,
+      className: "bg-primary",
+    },
+    {
+      label: t("portfolio.actions.sell"),
+      icon: <ArrowLeftFromLine size={16} />,
+      onClick: onSell,
+      className: "bg-primary",
+    },
+    {
+      label: t("portfolio.actions.transfer"),
+      icon: <ArrowRightLeft size={16} />,
+      onClick: onTransfer,
+      className: "bg-primary",
+    },
+    {
+      label: t("portfolio.actions.seeDetails"),
+      icon: <Eye size={16} />,
+      onClick: onSeeDetails,
+      className: "bg-primary",
+    },
+  ];
 
-      <div className="flex items-center gap-2">
-        <div className="text-right">
-          <div className="text-sm font-medium tabular-nums">
-            {formatCurrency(totalEur, "EUR", i18n.language)}
-          </div>
-          <div className={cn("flex items-center justify-end gap-0.5 text-xs tabular-nums", benefitColorClass)}>
-            {isPositive && <ArrowUp size={11} />}
-            {isNegative && <ArrowDown size={11} />}
-            <span>{formatBenefit(benefitAmount, "EUR", i18n.language)}</span>
-            <span>({formatPercent(benefitPercent, i18n.language)})</span>
-          </div>
+  return (
+    <SwipeableRow actions={swipeActions} disabled={isDesktop}>
+      <div className="flex items-center gap-3 px-4 py-3">
+        <div className="flex flex-1 items-center gap-2 min-w-0">
+          <ChartLine size={15} className="shrink-0 text-muted-foreground" />
+          <span className="truncate text-sm font-medium">{position.name}</span>
         </div>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button size="icon" variant="ghost" aria-label={t("portfolio.actions.label")}>
-              <EllipsisVertical size={16} />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={onBuy}>
-              <ArrowRightToLine />
-              {t("portfolio.actions.buy")}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={onSell}>
-              <ArrowLeftFromLine />
-              {t("portfolio.actions.sell")}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={onTransfer}>
-              <ArrowRightLeft />
-              {t("portfolio.actions.transfer")}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={onSeeDetails}>
-              <Eye />
-              {t("portfolio.actions.seeDetails")}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-2">
+          <div className="text-right">
+            <div className="text-sm font-medium tabular-nums">
+              {formatCurrency(totalEur, "EUR", i18n.language)}
+            </div>
+            <div className={cn("flex items-center justify-end gap-0.5 text-xs tabular-nums", benefitColorClass)}>
+              {isPositive && <ArrowUp size={11} />}
+              {isNegative && <ArrowDown size={11} />}
+              <span>{formatBenefit(benefitAmount, "EUR", i18n.language)}</span>
+              <span>({formatPercent(benefitPercent, i18n.language)})</span>
+            </div>
+          </div>
+
+          {isDesktop && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="icon" variant="ghost" aria-label={t("portfolio.actions.label")}>
+                  <EllipsisVertical size={16} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={onBuy}>
+                  <ArrowRightToLine />
+                  {t("portfolio.actions.buy")}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={onSell}>
+                  <ArrowLeftFromLine />
+                  {t("portfolio.actions.sell")}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={onTransfer}>
+                  <ArrowRightLeft />
+                  {t("portfolio.actions.transfer")}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={onSeeDetails}>
+                  <Eye />
+                  {t("portfolio.actions.seeDetails")}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
       </div>
-    </div>
+    </SwipeableRow>
   );
 }
