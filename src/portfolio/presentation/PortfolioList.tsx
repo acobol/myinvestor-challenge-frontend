@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_CATEGORIES } from "@/fund/domain/fund.constants";
 import { usePortfolio } from "@/portfolio/application/usePortfolio";
@@ -6,6 +6,7 @@ import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BuyFundDialog } from "@/fund/presentation/BuyFundDialog";
+import { FundDetailDialog } from "@/fund/presentation/FundDetailDialog";
 import { SellFundDialog } from "./SellFundDialog";
 import { TransferFundDialog } from "./TransferFundDialog";
 import { PortfolioGroup } from "./PortfolioGroup";
@@ -19,8 +20,7 @@ export function PortfolioList() {
   const [buyPosition, setBuyPosition] = useState<PortfolioPosition | null>(null);
   const [sellPosition, setSellPosition] = useState<PortfolioPosition | null>(null);
   const [transferPosition, setTransferPosition] = useState<PortfolioPosition | null>(null);
-
-  const noop = useCallback(() => {}, []);
+  const [detailPosition, setDetailPosition] = useState<PortfolioPosition | null>(null);
 
   if (isLoading) {
     return (
@@ -90,7 +90,7 @@ export function PortfolioList() {
                 onBuy={setBuyPosition}
                 onSell={setSellPosition}
                 onTransfer={setTransferPosition}
-                onSeeDetails={noop}
+                onSeeDetails={setDetailPosition}
               />
             ))
           )}
@@ -104,6 +104,7 @@ export function PortfolioList() {
         allPositions={positions}
         onClose={() => setTransferPosition(null)}
       />
+      <FundDetailDialog fund={detailPosition} onClose={() => setDetailPosition(null)} />
     </>
   );
 }

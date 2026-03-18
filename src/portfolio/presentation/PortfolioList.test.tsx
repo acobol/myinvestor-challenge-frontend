@@ -233,6 +233,47 @@ describe("PortfolioList", () => {
     });
   });
 
+  describe("see details action", () => {
+    it("opens the fund detail dialog when the See Details menu item is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.seeDetails") }));
+
+      expect(screen.getByRole("dialog")).toHaveAttribute("open");
+    });
+
+    it("shows the selected fund name inside the detail dialog", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const seededFunds = fundsDb.all().slice(0, 3);
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.seeDetails") }));
+
+      const dialog = await screen.findByRole("dialog");
+      const shownFund = seededFunds.find((f) => dialog.textContent?.includes(f.name));
+      expect(shownFund).toBeDefined();
+    });
+
+    it("closes the detail dialog when the close button is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.seeDetails") }));
+      await screen.findByRole("dialog");
+
+      await user.click(screen.getByRole("button", { name: /close/i }));
+
+      await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    });
+  });
+
   describe("buy action", () => {
     it("opens the buy dialog when the Buy menu item is clicked", async () => {
       const user = userEvent.setup();

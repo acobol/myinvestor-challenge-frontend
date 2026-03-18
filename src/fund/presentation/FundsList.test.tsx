@@ -1,10 +1,21 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { render, screen, waitFor, within } from "@/test/test-utils";
 import { server } from "@/mocks/server";
+import { fundsDb } from "@/mocks/data";
 import i18n from "@/i18n";
 import { FundsList } from "./FundsList";
+
+beforeEach(() => {
+  HTMLDialogElement.prototype.showModal = vi.fn(function (this: HTMLDialogElement) {
+    this.setAttribute("open", "");
+  });
+  HTMLDialogElement.prototype.close = vi.fn(function (this: HTMLDialogElement) {
+    this.removeAttribute("open");
+    this.dispatchEvent(new Event("close"));
+  });
+});
 
 describe("FundsList", () => {
   const t = i18n.t.bind(i18n);
@@ -187,6 +198,44 @@ describe("FundsList", () => {
 
       expect(screen.getByRole("menuitem", { name: t("funds.actions.buy") })).toBeInTheDocument();
       expect(screen.getByRole("menuitem", { name: t("funds.actions.seeDetails") })).toBeInTheDocument();
+    });
+
+    it("opens the fund detail dialog when See Details is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("funds.columns.actions") });
+      await user.click(firstTrigger);
+      await user.click(screen.getByRole("menuitem", { name: t("funds.actions.seeDetails") }));
+
+      expect(screen.getByRole("dialog")).toHaveAttribute("open");
+    });
+
+    it("shows the selected fund name inside the detail dialog", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("funds.columns.actions") });
+      await user.click(firstTrigger);
+      await user.click(screen.getByRole("menuitem", { name: t("funds.actions.seeDetails") }));
+
+      const dialog = await screen.findByRole("dialog");
+      const shownFund = fundsDb.all().find((f) => dialog.textContent?.includes(f.name));
+      expect(shownFund).toBeDefined();
+    });
+
+    it("closes the detail dialog when the close button is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("funds.columns.actions") });
+      await user.click(firstTrigger);
+      await user.click(screen.getByRole("menuitem", { name: t("funds.actions.seeDetails") }));
+      await screen.findByRole("dialog");
+
+      await user.click(screen.getByRole("button", { name: /close/i }));
+
+      await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
     });
   });
 

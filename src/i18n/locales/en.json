@@ -24,6 +24,10 @@
       "buy": "Buy",
       "seeDetails": "See details"
     },
+    "detail": {
+      "currentValue": "Current value",
+      "profitability": "Profitability"
+    },
     "categories": {
       "GLOBAL": "Global",
       "TECH": "Technology",

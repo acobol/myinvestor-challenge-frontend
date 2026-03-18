@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { PageSizeSelector, TablePagination } from "@/components/TablePagination";
 import { FundsTable } from "./FundsTable";
 import { BuyFundDialog } from "./BuyFundDialog";
+import { FundDetailDialog } from "./FundDetailDialog";
 
 const SKELETON_ROWS = 10;
 const SKELETON_COLS = 10;
@@ -19,6 +20,7 @@ export function FundsList() {
   const { page, pageSize, setPage, setPageSize } = usePagination(10);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [buyFund, setBuyFund] = useState<Fund | null>(null);
+  const [detailFund, setDetailFund] = useState<Fund | null>(null);
   const { data, isLoading, isError, refetch } = useFunds({
     page,
     limit: pageSize,
@@ -31,11 +33,7 @@ export function FundsList() {
   }
 
   const handleBuy = useCallback((fund: Fund) => setBuyFund(fund), []);
-
-  const handleSeeDetails = useCallback(() => {
-    // TODO: navigate to fund detail page, this is not required in the challenge, but we can keep it and delete if
-    // there is no time to implement it
-  }, []);
+  const handleSeeDetails = useCallback((fund: Fund) => setDetailFund(fund), []);
 
   if (isLoading) {
     return (
@@ -117,6 +115,7 @@ export function FundsList() {
         />
       </CardContent>
       <BuyFundDialog fund={buyFund} onClose={() => setBuyFund(null)} />
+      <FundDetailDialog fund={detailFund} onClose={() => setDetailFund(null)} />
     </Card>
   );
 }
