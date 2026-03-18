@@ -78,6 +78,27 @@
         "max": "You don't have enough units",
         "invalid": "Please enter a valid number of units"
       }
+    },
+    "transfer": {
+      "title": "Transfer Fund",
+      "fromLabel": "From",
+      "toLabel": "To",
+      "toPlaceholder": "Select destination fund",
+      "quantityLabel": "Units to transfer",
+      "available": "Available: {{units}} units",
+      "submit": "Transfer",
+      "submitting": "Transferring...",
+      "cancel": "Cancel",
+      "success": "Transfer completed successfully",
+      "successDetail": "{{units}} units of {{fromName}} → {{toName}}",
+      "error": "Failed to complete transfer. Please try again.",
+      "validation": {
+        "positive": "Units must be greater than 0",
+        "max": "You don't have enough units",
+        "invalid": "Please enter a valid number of units",
+        "toFundRequired": "Please select a destination fund",
+        "sameFund": "Destination fund cannot be the same as the source fund"
+      }
     }
   },
   "common": {

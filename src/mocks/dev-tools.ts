@@ -32,7 +32,13 @@ export const ERROR_ENDPOINTS = [
       HttpResponse.json({ message: "Simulated error" }, { status: 500 }),
     ),
   },
-
+  {
+    id: "transfer-fund",
+    label: "POST /funds/transfer",
+    handler: http.post(`${BASE}/funds/transfer`, () =>
+      HttpResponse.json({ message: "Simulated error" }, { status: 500 }),
+    ),
+  },
 ] as const;
 
 export type ErrorEndpointId = (typeof ERROR_ENDPOINTS)[number]["id"];

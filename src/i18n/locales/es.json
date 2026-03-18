@@ -78,6 +78,27 @@
         "max": "No tienes suficientes participaciones",
         "invalid": "Introduce un número de participaciones válido"
       }
+    },
+    "transfer": {
+      "title": "Traspasar fondo",
+      "fromLabel": "Desde",
+      "toLabel": "Hacia",
+      "toPlaceholder": "Selecciona el fondo destino",
+      "quantityLabel": "Participaciones a traspasar",
+      "available": "Disponibles: {{units}} participaciones",
+      "submit": "Traspasar",
+      "submitting": "Traspasando...",
+      "cancel": "Cancelar",
+      "success": "Traspaso realizado con éxito",
+      "successDetail": "{{units}} participaciones de {{fromName}} → {{toName}}",
+      "error": "Error al realizar el traspaso. Inténtalo de nuevo.",
+      "validation": {
+        "positive": "Las participaciones deben ser mayor que 0",
+        "max": "No tienes suficientes participaciones",
+        "invalid": "Introduce un número de participaciones válido",
+        "toFundRequired": "Selecciona un fondo destino",
+        "sameFund": "El fondo destino no puede ser el mismo que el fondo origen"
+      }
     }
   },
   "common": {

@@ -169,6 +169,70 @@ describe("PortfolioList", () => {
     });
   });
 
+  describe("transfer action", () => {
+    it("opens the transfer dialog when the Transfer menu item is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.transfer") }));
+
+      expect(screen.getByRole("dialog")).toHaveAttribute("open");
+      expect(
+        screen.getByRole("heading", { name: t("portfolio.transfer.title") }),
+      ).toBeInTheDocument();
+    });
+
+    it("shows the selected fund name inside the transfer dialog", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const seededFunds = fundsDb.all().slice(0, 3);
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.transfer") }));
+
+      const dialog = await screen.findByRole("dialog");
+      const shownFund = seededFunds.find((f) => dialog.textContent?.includes(f.name));
+      expect(shownFund).toBeDefined();
+    });
+
+    it("closes the transfer dialog when Cancel is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.transfer") }));
+      await screen.findByRole("dialog");
+
+      await user.click(screen.getByRole("button", { name: t("portfolio.transfer.cancel") }));
+
+      await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    });
+
+    it("shows a success toast and closes the dialog after a successful transfer", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const seededFunds = fundsDb.all();
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.transfer") }));
+      await screen.findByRole("dialog");
+
+      // Pick the second seeded fund as destination
+      await user.click(screen.getByRole("combobox"));
+      await user.click(await screen.findByRole("option", { name: seededFunds[1]!.name }));
+      await user.type(screen.getByLabelText(t("portfolio.transfer.quantityLabel")), "1");
+      await user.click(screen.getByRole("button", { name: t("portfolio.transfer.submit") }));
+
+      await screen.findByText(t("portfolio.transfer.success"));
+      await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    });
+  });
+
   describe("buy action", () => {
     it("opens the buy dialog when the Buy menu item is clicked", async () => {
       const user = userEvent.setup();

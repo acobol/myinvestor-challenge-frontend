@@ -47,3 +47,8 @@ Por evaluar:
 
 - Para mostrar el beneficio utilizo el Year to Date puesto que no tengo datos para hacer el calculo pero quería añadir esa característica a la lista de fondos. (Es algo meramente visual, un historico de datos sobre el valor de la praticipación me permitiría hacer algo real y añadir gráficas de evolución por ejemplo)
 - Al igual que para la compra asumo que el usuario siempre tiene la cartera en euros para mostrar los valores.
+
+
+#### Extra (no son requisitos de la prueba)
+- Devtools
+- i18n

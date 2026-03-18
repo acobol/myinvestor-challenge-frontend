@@ -61,4 +61,16 @@ export const portfolioHttpRepository: PortfolioRepository = {
       throw new Error(json.message ?? "Failed to sell fund");
     }
   },
+
+  async transferFund(fromFundId: string, toFundId: string, quantity: number): Promise<void> {
+    const response = await fetch(`${BASE_URL}/funds/transfer`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fromFundId, toFundId, quantity }),
+    });
+    if (!response.ok) {
+      const json = (await response.json()) as { message?: string };
+      throw new Error(json.message ?? "Failed to transfer fund");
+    }
+  },
 };
