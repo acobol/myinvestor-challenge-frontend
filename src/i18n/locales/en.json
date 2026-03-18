@@ -60,6 +60,24 @@
         "max": "Maximum amount is €10,000",
         "invalid": "Please enter a valid amount"
       }
+    },
+    "sell": {
+      "title": "Sell Fund",
+      "quantityLabel": "Units to sell",
+      "available": "Available: {{units}} units",
+      "proceedsPreview": "You will receive approximately {{amount}}",
+      "conversionNote": "USD/EUR exchange rate applied: {{rate}}",
+      "submit": "Sell",
+      "submitting": "Selling...",
+      "cancel": "Cancel",
+      "success": "Sale completed successfully",
+      "successDetail": "{{units}} units of {{name}} · {{amount}}",
+      "error": "Failed to complete sale. Please try again.",
+      "validation": {
+        "positive": "Units must be greater than 0",
+        "max": "You don't have enough units",
+        "invalid": "Please enter a valid number of units"
+      }
     }
   },
   "common": {

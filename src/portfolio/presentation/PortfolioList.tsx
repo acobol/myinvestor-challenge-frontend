@@ -6,6 +6,7 @@ import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BuyFundDialog } from "@/fund/presentation/BuyFundDialog";
+import { SellFundDialog } from "./SellFundDialog";
 import { PortfolioGroup } from "./PortfolioGroup";
 
 const SKELETON_GROUPS = 2;
@@ -15,6 +16,7 @@ export function PortfolioList() {
   const { t } = useTranslation();
   const { data, isLoading, isError, refetch } = usePortfolio();
   const [buyPosition, setBuyPosition] = useState<PortfolioPosition | null>(null);
+  const [sellPosition, setSellPosition] = useState<PortfolioPosition | null>(null);
 
   const noop = useCallback(() => {}, []);
 
@@ -84,7 +86,7 @@ export function PortfolioList() {
                 category={category}
                 items={items}
                 onBuy={setBuyPosition}
-                onSell={noop}
+                onSell={setSellPosition}
                 onTransfer={noop}
                 onSeeDetails={noop}
               />
@@ -94,6 +96,7 @@ export function PortfolioList() {
       </Card>
 
       <BuyFundDialog fund={buyPosition} onClose={() => setBuyPosition(null)} />
+      <SellFundDialog position={sellPosition} onClose={() => setSellPosition(null)} />
     </>
   );
 }

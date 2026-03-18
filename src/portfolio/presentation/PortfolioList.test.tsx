@@ -109,6 +109,66 @@ describe("PortfolioList", () => {
     });
   });
 
+  describe("sell action", () => {
+    it("opens the sell dialog when the Sell menu item is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.sell") }));
+
+      expect(screen.getByRole("dialog")).toHaveAttribute("open");
+      expect(
+        screen.getByRole("heading", { name: t("portfolio.sell.title") }),
+      ).toBeInTheDocument();
+    });
+
+    it("shows the selected fund name inside the sell dialog", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const seededFunds = fundsDb.all().slice(0, 3);
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.sell") }));
+
+      const dialog = await screen.findByRole("dialog");
+      const shownFund = seededFunds.find((f) => dialog.textContent?.includes(f.name));
+      expect(shownFund).toBeDefined();
+    });
+
+    it("closes the sell dialog when Cancel is clicked", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.sell") }));
+      await screen.findByRole("dialog");
+
+      await user.click(screen.getByRole("button", { name: t("portfolio.sell.cancel") }));
+
+      await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    });
+
+    it("shows a success toast and closes the dialog after a successful sale", async () => {
+      const user = userEvent.setup();
+      await renderAndWait();
+
+      const [firstTrigger] = screen.getAllByRole("button", { name: t("portfolio.actions.label") });
+      await user.click(firstTrigger!);
+      await user.click(screen.getByRole("menuitem", { name: t("portfolio.actions.sell") }));
+      await screen.findByRole("dialog");
+
+      await user.type(screen.getByLabelText(t("portfolio.sell.quantityLabel")), "1");
+      await user.click(screen.getByRole("button", { name: t("portfolio.sell.submit") }));
+
+      await screen.findByText(t("portfolio.sell.success"));
+      await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    });
+  });
+
   describe("buy action", () => {
     it("opens the buy dialog when the Buy menu item is clicked", async () => {
       const user = userEvent.setup();

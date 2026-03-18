@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { formatCurrency } from "@/fund/presentation/fund.formatters";
-import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
 
 export interface CurrencyAmountInputProps {
   value: number;
@@ -54,7 +54,7 @@ export function CurrencyAmountInput({
   }
 
   return (
-    <input
+    <Input
       {...props}
       type="text"
       inputMode="decimal"
@@ -62,14 +62,6 @@ export function CurrencyAmountInput({
       onChange={handleChange}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      className={cn(
-        "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background",
-        "placeholder:text-muted-foreground",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        "disabled:cursor-not-allowed disabled:opacity-50",
-        (props["aria-invalid"] === true || props["aria-invalid"] === "true") &&
-          "border-destructive",
-      )}
     />
   );
 }

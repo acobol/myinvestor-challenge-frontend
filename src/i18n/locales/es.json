@@ -60,6 +60,24 @@
         "max": "El importe máximo es 10.000 €",
         "invalid": "Introduce un importe válido"
       }
+    },
+    "sell": {
+      "title": "Vender fondo",
+      "quantityLabel": "Participaciones a vender",
+      "available": "Disponibles: {{units}} participaciones",
+      "proceedsPreview": "Recibirás aproximadamente {{amount}}",
+      "conversionNote": "Tipo de cambio USD/EUR aplicado: {{rate}}",
+      "submit": "Vender",
+      "submitting": "Vendiendo...",
+      "cancel": "Cancelar",
+      "success": "Venta realizada con éxito",
+      "successDetail": "{{units}} participaciones de {{name}} · {{amount}}",
+      "error": "Error al realizar la venta. Inténtalo de nuevo.",
+      "validation": {
+        "positive": "Las participaciones deben ser mayor que 0",
+        "max": "No tienes suficientes participaciones",
+        "invalid": "Introduce un número de participaciones válido"
+      }
     }
   },
   "common": {
