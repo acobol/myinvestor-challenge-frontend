@@ -6,6 +6,7 @@ import { fundsDb } from "@/mocks/data";
 import "@/i18n";
 import i18n from "@/i18n";
 import { BuyFundDialog } from "./BuyFundDialog";
+import { Toaster } from "@/components/ui/sonner";
 import { EUR_USD_RATE } from "@/fund/domain/fund.constants";
 import type { Fund } from "@/fund/domain/fund.schema";
 
@@ -43,7 +44,12 @@ const usdFund: Fund = {
 };
 
 function renderDialog(fund: Fund | null, onClose = vi.fn()) {
-  return render(<BuyFundDialog fund={fund} onClose={onClose} />);
+  return render(
+    <>
+      <Toaster />
+      <BuyFundDialog fund={fund} onClose={onClose} />
+    </>,
+  );
 }
 
 describe("BuyFundDialog", () => {
@@ -185,20 +191,58 @@ describe("BuyFundDialog", () => {
   });
 
   describe("submission", () => {
-    it("calls the buy API with the correct quantity and closes the dialog", async () => {
+    it("closes the dialog on successful purchase", async () => {
       const user = userEvent.setup();
       const onClose = vi.fn();
-      // Use a fund that exists in the seeded DB so the buy endpoint returns 200
       const seededFund = fundsDb.all()[0]!;
       renderDialog(seededFund, onClose);
 
-      const input = screen.getByLabelText(i18n.t("portfolio.buy.amountLabel"));
-      await user.type(input, "50");
+      await user.type(
+        screen.getByLabelText(i18n.t("portfolio.buy.amountLabel")),
+        "50",
+      );
       await user.click(
         screen.getByRole("button", { name: i18n.t("portfolio.buy.submit") }),
       );
 
       await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1));
+    });
+
+    it("shows a success toast with fund name on successful purchase", async () => {
+      const user = userEvent.setup();
+      const seededFund = fundsDb.all()[0]!;
+      renderDialog(seededFund);
+
+      await user.type(
+        screen.getByLabelText(i18n.t("portfolio.buy.amountLabel")),
+        "50",
+      );
+      await user.click(
+        screen.getByRole("button", { name: i18n.t("portfolio.buy.submit") }),
+      );
+
+      await screen.findByText(i18n.t("portfolio.buy.success"));
+      expect(
+        screen.getByText(new RegExp(seededFund.name), { selector: "[data-description]" }),
+      ).toBeInTheDocument();
+    });
+
+    it("shows an error toast and closes the dialog on failed purchase", async () => {
+      const user = userEvent.setup();
+      const onClose = vi.fn();
+      const unknownFund = { ...eurFund, id: "does-not-exist" };
+      renderDialog(unknownFund, onClose);
+
+      await user.type(
+        screen.getByLabelText(i18n.t("portfolio.buy.amountLabel")),
+        "50",
+      );
+      await user.click(
+        screen.getByRole("button", { name: i18n.t("portfolio.buy.submit") }),
+      );
+
+      await screen.findByText(i18n.t("portfolio.buy.error"));
+      expect(onClose).toHaveBeenCalledTimes(1);
     });
   });
 });

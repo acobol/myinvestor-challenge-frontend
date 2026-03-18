@@ -14,7 +14,6 @@ export interface BuyFundFormProps {
   onSubmit: (quantity: number) => void;
   onCancel: () => void;
   isPending: boolean;
-  isError: boolean;
 }
 
 export function BuyFundForm({
@@ -22,7 +21,6 @@ export function BuyFundForm({
   onSubmit,
   onCancel,
   isPending,
-  isError,
 }: BuyFundFormProps) {
   const { t, i18n } = useTranslation();
 
@@ -115,12 +113,6 @@ export function BuyFundForm({
         {fund.value.currency === "USD" && (
           <p className="text-xs text-muted-foreground">
             {t("portfolio.buy.conversionNote", { rate: EUR_USD_RATE })}
-          </p>
-        )}
-
-        {isError && (
-          <p role="alert" className="text-sm text-destructive">
-            {t("portfolio.buy.error")}
           </p>
         )}
 

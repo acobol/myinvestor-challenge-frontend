@@ -41,6 +41,8 @@
       "submit": "Comprar",
       "submitting": "Comprando...",
       "cancel": "Cancelar",
+      "success": "Compra realizada con éxito",
+      "successDetail": "{{units}} participaciones de {{name}}",
       "error": "Error al realizar la compra. Inténtalo de nuevo.",
       "validation": {
         "positive": "El importe debe ser mayor que 0",

@@ -41,6 +41,8 @@
       "submit": "Buy",
       "submitting": "Buying...",
       "cancel": "Cancel",
+      "success": "Purchase completed successfully",
+      "successDetail": "{{units}} units of {{name}}",
       "error": "Failed to complete purchase. Please try again.",
       "validation": {
         "positive": "Amount must be greater than 0",
