@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import type { Fund } from "@/fund/domain/fund.schema";
-import { EUR_USD_RATE } from "@/fund/domain/fund.constants";
+import { EUR_USD_RATE } from "@/shared/domain/currency";
 import { calculateQuantity } from "@/portfolio/application/buy-fund.utils";
 import { BuyFormSchema, type BuyFormValues } from "@/portfolio/domain/buy-fund.schema";
 import { formatCurrency, formatAmount } from "./fund.formatters";

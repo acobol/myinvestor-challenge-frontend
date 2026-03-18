@@ -1,5 +1,5 @@
 import type { Fund } from "@/fund/domain/fund.schema";
-import { EUR_USD_RATE } from "@/fund/domain/fund.constants";
+import { EUR_USD_RATE } from "@/shared/domain/currency";
 
 /**
  * Converts a EUR amount to the number of fund units the user would receive.

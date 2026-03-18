@@ -33,6 +33,17 @@
   },
   "portfolio": {
     "title": "Mi cartera",
+    "loading": "Cargando cartera...",
+    "error": "No se pudo cargar la cartera. Inténtalo de nuevo.",
+    "retry": "Reintentar",
+    "empty": "No tienes fondos en tu cartera.",
+    "actions": {
+      "label": "Acciones",
+      "buy": "Comprar",
+      "sell": "Vender",
+      "transfer": "Traspasar",
+      "seeDetails": "Ver detalles"
+    },
     "buy": {
       "title": "Comprar fondo",
       "amountLabel": "Importe (€)",

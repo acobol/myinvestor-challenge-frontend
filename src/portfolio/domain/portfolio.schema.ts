@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { CurrencySchema } from "@/fund/domain/fund.schema";
+import { FundCategorySchema, FundProfitabilitySchema } from "@/fund/domain/fund.schema";
+import { CurrencySchema } from "@/shared/domain/currency";
 
 export const PortfolioItemSchema = z.object({
   id: z.string(),
@@ -11,8 +12,15 @@ export const PortfolioItemSchema = z.object({
   }),
 });
 
+/** Portfolio item enriched with fund metadata (category, symbol, profitability). */
+export const PortfolioPositionSchema = PortfolioItemSchema.extend({
+  symbol: z.string(),
+  category: FundCategorySchema,
+  profitability: FundProfitabilitySchema,
+});
+
 export const PortfolioResponseSchema = z.object({
-  data: z.array(PortfolioItemSchema),
+  data: z.array(PortfolioPositionSchema),
 });
 
 export const PortfolioEntrySchema = z.object({
@@ -28,4 +36,5 @@ export const PortfolioActionResponseSchema = z.object({
 });
 
 export type PortfolioItem = z.infer<typeof PortfolioItemSchema>;
+export type PortfolioPosition = z.infer<typeof PortfolioPositionSchema>;
 export type PortfolioEntry = z.infer<typeof PortfolioEntrySchema>;

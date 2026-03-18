@@ -33,6 +33,17 @@
   },
   "portfolio": {
     "title": "My Portfolio",
+    "loading": "Loading portfolio...",
+    "error": "Failed to load portfolio. Please try again.",
+    "retry": "Retry",
+    "empty": "You have no funds in your portfolio.",
+    "actions": {
+      "label": "Actions",
+      "buy": "Buy",
+      "sell": "Sell",
+      "transfer": "Transfer",
+      "seeDetails": "See details"
+    },
     "buy": {
       "title": "Buy Fund",
       "amountLabel": "Amount (€)",

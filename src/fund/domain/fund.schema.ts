@@ -1,11 +1,6 @@
 import { z } from "zod";
-import {
-  CURRENCIES,
-  FUND_CATEGORIES,
-  FUND_SORT_OPTIONS,
-} from "./fund.constants";
-
-export const CurrencySchema = z.enum(CURRENCIES);
+import { FUND_CATEGORIES, FUND_SORT_OPTIONS } from "./fund.constants";
+import { CurrencySchema } from "@/shared/domain/currency";
 
 export const FundCategorySchema = z.enum(FUND_CATEGORIES);
 
@@ -67,4 +62,4 @@ export type BuySellRequest = z.infer<typeof BuySellRequestSchema>;
 export type TransferRequest = z.infer<typeof TransferRequestSchema>;
 
 // Re-export constants types for convenience
-export type { Currency, FundCategory, FundSortOption } from "./fund.constants";
+export type { FundCategory, FundSortOption } from "./fund.constants";

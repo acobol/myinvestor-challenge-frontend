@@ -7,7 +7,7 @@ import "@/i18n";
 import i18n from "@/i18n";
 import { BuyFundDialog } from "./BuyFundDialog";
 import { Toaster } from "@/components/ui/sonner";
-import { EUR_USD_RATE } from "@/fund/domain/fund.constants";
+import { EUR_USD_RATE } from "@/shared/domain/currency";
 import type { Fund } from "@/fund/domain/fund.schema";
 
 // Polyfill HTMLDialogElement for jsdom

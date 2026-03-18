@@ -1,8 +1,3 @@
-export const CURRENCIES = ["USD", "EUR"] as const;
-
-/** Fixed EUR/USD exchange rate used for currency conversion in fund purchases. */
-export const EUR_USD_RATE = 1.08;
-
 export const FUND_CATEGORIES = [
   "GLOBAL",
   "TECH",
@@ -29,6 +24,5 @@ export const FUND_SORT_OPTIONS = [
   "profitability.fiveYears:desc",
 ] as const;
 
-export type Currency = (typeof CURRENCIES)[number];
 export type FundCategory = (typeof FUND_CATEGORIES)[number];
 export type FundSortOption = (typeof FUND_SORT_OPTIONS)[number];

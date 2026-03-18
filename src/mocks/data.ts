@@ -3,10 +3,10 @@ import { faker } from "@faker-js/faker";
 import {
   FundSchema,
   FundCategorySchema,
-  CurrencySchema,
   type Fund,
   type FundCategory,
 } from "@/fund/domain/fund.schema";
+import { CurrencySchema } from "@/shared/domain/currency";
 import { PortfolioItemSchema } from "@/portfolio/domain/portfolio.schema";
 
 // ---- Collections ----

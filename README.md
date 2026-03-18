@@ -18,6 +18,7 @@
 - Test E2E: Playwright, herramienta algo más moderna que Cypress, con mejor rendimiento en mi experiencia y el uso es muy similar y aunque no tengo tanta experiencia como con Cypress no espero muchos bloqueos.
 - React-i18next: internacionalización de los textos
 - React hook form para los formularios con zod: ligera, API sencilla, muchas features y con muy buen rendimiento.
+- No sigo un flujo de ramas en git por simplicidad debido a las características de la prueba, por eso algunos commits añaden cosas como acciones sin implementar que se añaden en commitrs posteriores.
 
 Por evaluar:
 
@@ -41,3 +42,8 @@ Por evaluar:
 - La columna con el nombre también es sticky en el scroll horizontal, para saber siempre a que fondo corresponden los datos.
 - En FundsTable.tsx hay dos componentes en lugar de solo uno, puesto que el componente de celda es auxiliar y el archivo es pequeño puede estar contenido ahí, si el archivo creciese o existiese la necesidad de reusar el componente se puede extraer fácilmente.
 - Asumo que el usuario siempre compra en euros, hago conversión en los fondos que tienen dolares como divisa.
+
+#### Cartera
+
+- Para mostrar el beneficio utilizo el Year to Date puesto que no tengo datos para hacer el calculo pero quería añadir esa característica a la lista de fondos. (Es algo meramente visual, un historico de datos sobre el valor de la praticipación me permitiría hacer algo real y añadir gráficas de evolución por ejemplo)
+- Al igual que para la compra asumo que el usuario siempre tiene la cartera en euros para mostrar los valores.
