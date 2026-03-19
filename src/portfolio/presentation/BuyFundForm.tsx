@@ -4,7 +4,7 @@ import type { Fund } from "@/fund/domain/fund.schema";
 import { EUR_USD_RATE } from "@/shared/domain/currency";
 import { calculateQuantity } from "@/portfolio/application/fund-actions.utils";
 import { BuyFormSchema, type BuyFormValues } from "@/portfolio/domain/buy-fund.schema";
-import { formatCurrency, formatAmount } from "./fund.formatters";
+import { formatCurrency, formatAmount } from "@/fund/presentation/fund.formatters";
 import { CurrencyAmountInput } from "@/shared/presentation/CurrencyAmountInput";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";

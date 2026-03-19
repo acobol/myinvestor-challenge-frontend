@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageSizeSelector, TablePagination } from "@/components/TablePagination";
 import { FundsTable } from "./FundsTable";
-import { BuyFundDialog } from "./BuyFundDialog";
+import { BuyFundDialog } from "@/portfolio/presentation/BuyFundDialog";
 import { useFundDetail } from "./useFundDetail";
 
 const SKELETON_ROWS = 10;
