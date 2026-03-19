@@ -53,6 +53,7 @@ Por evaluar:
 #### Extra (no son requisitos de la prueba)
 - Devtools
 - i18n
+- Selector de temas
 
 ## Mejoras
 - Investigar alguna forma de poder añadir el swipe a la tabla de fondos también, por consistencia, aunque la diferencia de ser una tabla que tiene scroll lateral respecto a una lista de items limita las posibilidades.

@@ -135,6 +135,9 @@
       "next": "Siguiente",
       "of": "de",
       "perPage": "Por página"
+    },
+    "theme": {
+      "toggle": "Cambiar tema"
     }
   }
 }
