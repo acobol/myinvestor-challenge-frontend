@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { SortIcon } from "@/components/SortIcon";
+import { LinkButton } from "@/components/LinkButton";
 import { formatAmount, formatPercent } from "./fund.formatters";
 
 const columnHelper = createColumnHelper<Fund>();
@@ -52,7 +53,11 @@ export function FundsTable({ data, sorting, onSortingChange, onBuy, onSeeDetails
     () => [
       columnHelper.accessor("name", {
         header: () => t("funds.columns.name"),
-        cell: ({ getValue }) => <span className="font-medium">{getValue()}</span>,
+        cell: ({ row }) => (
+          <LinkButton onClick={() => onSeeDetails(row.original)}>
+            {row.original.name}
+          </LinkButton>
+        ),
         sortDescFirst: true
       }),
       columnHelper.accessor("symbol", {

@@ -12,6 +12,7 @@ import { SwipeableRow } from "@/components/SwipeableRow";
 import type { SwipeAction } from "@/components/SwipeableRow";
 import { useMediaQuery } from "@/shared/application/useMediaQuery";
 import { cn } from "@/lib/utils";
+import { LinkButton } from "@/components/LinkButton";
 import { formatAmount, formatCurrency, formatPercent } from "@/fund/presentation/fund.formatters";
 import { toEur, formatBenefit } from "./portfolio.formatters";
 
@@ -73,7 +74,9 @@ export function PortfolioItemRow({ position, onBuy, onSell, onTransfer, onSeeDet
         <div className="flex flex-1 items-center gap-2 min-w-0">
           <ChartLine size={15} className="shrink-0 text-muted-foreground" />
           <div className="min-w-0">
-            <span className="truncate text-sm font-medium block">{position.name}</span>
+            <LinkButton onClick={onSeeDetails}>
+              {position.name}
+            </LinkButton>
             <span className="text-xs text-muted-foreground">
               {t("portfolio.units", { units: formatAmount(position.quantity, i18n.language) })}
             </span>

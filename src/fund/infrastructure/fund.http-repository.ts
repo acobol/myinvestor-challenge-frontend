@@ -1,6 +1,6 @@
-import { FundsResponseSchema } from "@/fund/domain/fund.schema";
+import { FundResponseSchema, FundsResponseSchema } from "@/fund/domain/fund.schema";
 import type { FundRepository } from "@/fund/domain/fund.port";
-import type { FundsQuery, FundsResponse } from "@/fund/domain/fund.schema";
+import type { Fund, FundsQuery, FundsResponse } from "@/fund/domain/fund.schema";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -22,5 +22,16 @@ export const fundHttpRepository: FundRepository = {
 
     const json: unknown = await response.json();
     return FundsResponseSchema.parse(json);
+  },
+
+  async getFundById(id: string): Promise<Fund> {
+    const response = await fetch(`${BASE_URL}/funds/${id}`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch fund: ${response.status} ${response.statusText}`);
+    }
+
+    const json: unknown = await response.json();
+    return FundResponseSchema.parse(json).data;
   },
 };

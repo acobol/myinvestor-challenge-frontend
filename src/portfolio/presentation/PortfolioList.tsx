@@ -6,7 +6,7 @@ import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BuyFundDialog } from "@/fund/presentation/BuyFundDialog";
-import { FundDetailDialog } from "@/fund/presentation/FundDetailDialog";
+import { useFundDetail } from "@/fund/presentation/useFundDetail";
 import { SellFundDialog } from "./SellFundDialog";
 import { TransferFundDialog } from "./TransferFundDialog";
 import { PortfolioGroup } from "./PortfolioGroup";
@@ -20,7 +20,7 @@ export function PortfolioList() {
   const [buyPosition, setBuyPosition] = useState<PortfolioPosition | null>(null);
   const [sellPosition, setSellPosition] = useState<PortfolioPosition | null>(null);
   const [transferPosition, setTransferPosition] = useState<PortfolioPosition | null>(null);
-  const [detailPosition, setDetailPosition] = useState<PortfolioPosition | null>(null);
+  const { openDetail, detailDialog } = useFundDetail();
 
   if (isLoading) {
     return (
@@ -90,7 +90,7 @@ export function PortfolioList() {
                 onBuy={setBuyPosition}
                 onSell={setSellPosition}
                 onTransfer={setTransferPosition}
-                onSeeDetails={setDetailPosition}
+                onSeeDetails={(p) => openDetail(p.id)}
               />
             ))
           )}
@@ -104,7 +104,7 @@ export function PortfolioList() {
         allPositions={positions}
         onClose={() => setTransferPosition(null)}
       />
-      <FundDetailDialog fund={detailPosition} onClose={() => setDetailPosition(null)} />
+      {detailDialog}
     </>
   );
 }

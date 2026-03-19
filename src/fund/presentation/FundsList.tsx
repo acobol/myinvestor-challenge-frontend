@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { PageSizeSelector, TablePagination } from "@/components/TablePagination";
 import { FundsTable } from "./FundsTable";
 import { BuyFundDialog } from "./BuyFundDialog";
-import { FundDetailDialog } from "./FundDetailDialog";
+import { useFundDetail } from "./useFundDetail";
 
 const SKELETON_ROWS = 10;
 const SKELETON_COLS = 10;
@@ -20,7 +20,7 @@ export function FundsList() {
   const { page, pageSize, setPage, setPageSize } = usePagination(10);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [buyFund, setBuyFund] = useState<Fund | null>(null);
-  const [detailFund, setDetailFund] = useState<Fund | null>(null);
+  const { openDetail, detailDialog } = useFundDetail();
   const { data, isLoading, isError, refetch } = useFunds({
     page,
     limit: pageSize,
@@ -33,7 +33,7 @@ export function FundsList() {
   }
 
   const handleBuy = useCallback((fund: Fund) => setBuyFund(fund), []);
-  const handleSeeDetails = useCallback((fund: Fund) => setDetailFund(fund), []);
+  const handleSeeDetails = useCallback((fund: Fund) => openDetail(fund.id), [openDetail]);
 
   if (isLoading) {
     return (
@@ -115,7 +115,7 @@ export function FundsList() {
         />
       </CardContent>
       <BuyFundDialog fund={buyFund} onClose={() => setBuyFund(null)} />
-      <FundDetailDialog fund={detailFund} onClose={() => setDetailFund(null)} />
+      {detailDialog}
     </Card>
   );
 }

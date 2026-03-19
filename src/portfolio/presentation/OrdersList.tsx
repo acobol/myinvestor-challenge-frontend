@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useOrders } from "@/portfolio/application/useOrders";
+import { useFundDetail } from "@/fund/presentation/useFundDetail";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { OrderRow } from "./OrderRow";
@@ -9,6 +10,7 @@ const SKELETON_ROWS = 4;
 export function OrdersList() {
   const { t, i18n } = useTranslation();
   const { data, isLoading, isError, refetch } = useOrders();
+  const { openDetail, detailDialog } = useFundDetail();
 
   if (isLoading) {
     return (
@@ -64,15 +66,23 @@ export function OrdersList() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{t("portfolio.orders.title")}</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0">
-        {orders.map((order) => (
-          <OrderRow key={order.id} order={order} locale={i18n.language} />
-        ))}
-      </CardContent>
-    </Card>
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("portfolio.orders.title")}</CardTitle>
+        </CardHeader>
+        <CardContent className="p-0">
+          {orders.map((order) => (
+            <OrderRow
+              key={order.id}
+              order={order}
+              locale={i18n.language}
+              onSeeDetails={() => openDetail(order.fundId)}
+            />
+          ))}
+        </CardContent>
+      </Card>
+      {detailDialog}
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatCurrency, formatAmount } from "@/fund/presentation/fund.formatters";
 import { formatOrderDate } from "./order.formatters";
 import { ArrowRightLeft, ShoppingCart, TrendingDown } from "lucide-react";
+import { LinkButton } from "@/components/LinkButton";
 
 const ORDER_TYPE_STYLES: Record<OrderType, string> = {
   BUY: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
@@ -20,9 +21,10 @@ const ORDER_TYPE_ICONS: Record<OrderType, React.ReactNode> = {
 export interface OrderRowProps {
   order: Order;
   locale: string;
+  onSeeDetails?: () => void;
 }
 
-export function OrderRow({ order, locale }: OrderRowProps) {
+export function OrderRow({ order, locale, onSeeDetails }: OrderRowProps) {
   const { t } = useTranslation();
 
   return (
@@ -33,7 +35,9 @@ export function OrderRow({ order, locale }: OrderRowProps) {
             {ORDER_TYPE_ICONS[order.type]}
             {t(`portfolio.orders.types.${order.type}`)}
           </Badge>
-          <span className="text-sm font-medium">{order.fundName}</span>
+          <LinkButton onClick={onSeeDetails}>
+            {order.fundName}
+          </LinkButton>
         </div>
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span>{formatOrderDate(order.date, locale)}</span>
