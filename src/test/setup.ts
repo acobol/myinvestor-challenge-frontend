@@ -6,6 +6,13 @@ import { server } from "@/mocks/server";
 import { seedDatabase } from "@/mocks/data";
 import { orderIdbRepository } from "@/portfolio/infrastructure/order.idb-repository";
 
+// Recharts' ResponsiveContainer uses ResizeObserver; jsdom does not implement it.
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 // Sonner uses matchMedia for dark-mode detection; jsdom does not implement it.
 window.matchMedia = window.matchMedia ?? ((query: string) => ({
   matches: false,

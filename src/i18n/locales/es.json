@@ -40,6 +40,9 @@
     "loading": "Cargando cartera...",
     "error": "No se pudo cargar la cartera. Inténtalo de nuevo.",
     "retry": "Reintentar",
+    "summary": {
+      "total": "Valor total de la cartera"
+    },
     "empty": "No tienes fondos en tu cartera.",
     "units": "{{units}} participaciones",
     "actions": {

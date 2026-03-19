@@ -40,6 +40,9 @@
     "loading": "Loading portfolio...",
     "error": "Failed to load portfolio. Please try again.",
     "retry": "Retry",
+    "summary": {
+      "total": "Total portfolio value"
+    },
     "empty": "You have no funds in your portfolio.",
     "units": "{{units}} units",
     "actions": {

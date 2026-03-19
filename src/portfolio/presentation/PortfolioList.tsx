@@ -10,6 +10,7 @@ import { useFundDetail } from "@/fund/presentation/useFundDetail";
 import { SellFundDialog } from "./SellFundDialog";
 import { TransferFundDialog } from "./TransferFundDialog";
 import { PortfolioGroup } from "./PortfolioGroup";
+import { PortfolioSummary } from "./PortfolioSummary";
 
 const SKELETON_GROUPS = 2;
 const SKELETON_ITEMS = 3;
@@ -82,7 +83,11 @@ export function PortfolioList() {
           {groups.length === 0 ? (
             <p className="py-10 text-center text-sm text-muted-foreground">{t("portfolio.empty")}</p>
           ) : (
-            groups.map(({ category, items }) => (
+            <>
+              <div className="border-b px-4">
+                <PortfolioSummary positions={positions} />
+              </div>
+              {groups.map(({ category, items }) => (
               <PortfolioGroup
                 key={category}
                 category={category}
@@ -92,7 +97,8 @@ export function PortfolioList() {
                 onTransfer={setTransferPosition}
                 onSeeDetails={(p) => openDetail(p.id)}
               />
-            ))
+            ))}
+            </>
           )}
         </CardContent>
       </Card>

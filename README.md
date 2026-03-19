@@ -56,6 +56,7 @@ Por evaluar:
 - Selector de temas
 - Nombre del fondo como link a la modal de ver detalles del fondo
 - Toggle de idioma
+- Resumen de la cartera con valor total y gráfico sencillo
 
 ## Mejoras
 - Investigar alguna forma de poder añadir el swipe a la tabla de fondos también, por consistencia, aunque la diferencia de ser una tabla que tiene scroll lateral respecto a una lista de items limita las posibilidades.
@@ -63,3 +64,6 @@ Por evaluar:
 - Para el Swipe he tomado la opción de comprobar el tamaño de la pantalla, pero eso solo no determina si estamos en mobile o no, habría que comprobar mejor si estamos en movil para mostrar el swipe o las acciones con el dropdown, por ejemplo en una tablet estamos en un entorno con accion táctil también y se podría ofrecer el Swipe también.
 - Cuando las acciones de compra, venta o traspason fallan se podría guardar los datos de la acción de forma que en la notificación del error al usuario se le pueda dar la opción de reintentar sin que tenga que volver a realizarla el usuario.
 - Las dev tools se pueden mejorar de forma que no hiciese falta añadir cada endpoint a mano cada vez que se añade uno nuevo.
+- Búsquedas y filtrados en las páginas
+- Extraer algunas acciones más que son comunes en las distintas páginas.
+- El tema es algo sencillo de más, no marca lo suficiente ciertas cosas como la ellipsis de acciones.
