@@ -67,3 +67,12 @@ Por evaluar:
 - Búsquedas y filtrados en las páginas
 - Extraer algunas acciones más que son comunes en las distintas páginas.
 - El tema es algo sencillo de más, no marca lo suficiente ciertas cosas como la ellipsis de acciones.
+- Un selector de divisa para la visualización de los datos.
+- Extraer algo más la parte común de varios componentes, como pueden ser las acciones, el error de las páginas etc.
+- Revisar los tests para sacar los polyfills comunes y utilidades comunes.
+- Revisar la semántica de los tests, se han hecho algo rápido y seguramente hay incoherencias en la forma de hacer asserts.
+- Revisar la estructura de carpetas y la estructura de la arquitectura de dominio, inicialmente parecía tener sentido el como está estructurada, pero durante el desarrollo y con la aplicación creciendo los dominios parecían mezclarse y tal vez tiene más sentido tener los dominios y la infraestructura a primer nivel con la parte de aplicación siendo la única separada por páginas.
+- Revisar mejor el tipado, Typescript es uno de los puntos que tengo pendiente a mejorar y tal vez me he fiado de más de mi conocimiento y la IA en este tema.
+- Añadir Storybook o similar para poder trabajar en los componentes de forma aislada y ver los cambios en tiempo real.
+- Revisar la parte de compra y venta de participaciones, al haber hecho la compra con divisa en lugar de número de participaciones hay algunos problemas derivados de la precisión de coma flotante de javascript
+- Haber trabajado en los test End to End, al haber podido dedicar solo pequeños ratos he tenido que sacrificar algunas ideas iniciales.

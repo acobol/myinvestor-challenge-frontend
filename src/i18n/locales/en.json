@@ -44,6 +44,7 @@
       "total": "Total portfolio value"
     },
     "empty": "You have no funds in your portfolio.",
+    "emptyAction": "Browse available funds",
     "units": "{{units}} units",
     "actions": {
       "label": "Actions",

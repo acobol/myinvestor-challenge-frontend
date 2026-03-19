@@ -101,6 +101,8 @@ describe("PortfolioList", () => {
       await renderAndWait();
 
       expect(screen.getByText(t("portfolio.empty"))).toBeInTheDocument();
+      const link = screen.getByRole("link", { name: t("portfolio.emptyAction") });
+      expect(link).toHaveAttribute("href", "/funds");
     });
 
     it("renders an actions button for each position", async () => {

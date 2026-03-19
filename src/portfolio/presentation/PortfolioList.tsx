@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { FUND_CATEGORIES } from "@/fund/domain/fund.constants";
 import { usePortfolio } from "@/portfolio/application/usePortfolio";
@@ -81,7 +82,15 @@ export function PortfolioList() {
         </CardHeader>
         <CardContent className="p-0 pb-2">
           {groups.length === 0 ? (
-            <p className="py-10 text-center text-sm text-muted-foreground">{t("portfolio.empty")}</p>
+            <div className="flex flex-col items-center gap-3 py-10 text-center">
+              <p className="text-sm text-muted-foreground">{t("portfolio.empty")}</p>
+              <Link
+                to="/funds"
+                className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+              >
+                {t("portfolio.emptyAction")}
+              </Link>
+            </div>
           ) : (
             <>
               <div className="border-b px-4">

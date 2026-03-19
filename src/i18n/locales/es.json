@@ -44,6 +44,7 @@
       "total": "Valor total de la cartera"
     },
     "empty": "No tienes fondos en tu cartera.",
+    "emptyAction": "Explorar fondos disponibles",
     "units": "{{units}} participaciones",
     "actions": {
       "label": "Acciones",
