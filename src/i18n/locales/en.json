@@ -41,6 +41,7 @@
     "error": "Failed to load portfolio. Please try again.",
     "retry": "Retry",
     "empty": "You have no funds in your portfolio.",
+    "units": "{{units}} units",
     "actions": {
       "label": "Actions",
       "buy": "Buy",

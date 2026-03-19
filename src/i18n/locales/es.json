@@ -41,6 +41,7 @@
     "error": "No se pudo cargar la cartera. Inténtalo de nuevo.",
     "retry": "Reintentar",
     "empty": "No tienes fondos en tu cartera.",
+    "units": "{{units}} participaciones",
     "actions": {
       "label": "Acciones",
       "buy": "Comprar",

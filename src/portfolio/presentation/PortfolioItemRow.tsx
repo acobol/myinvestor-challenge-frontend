@@ -12,7 +12,7 @@ import { SwipeableRow } from "@/components/SwipeableRow";
 import type { SwipeAction } from "@/components/SwipeableRow";
 import { useMediaQuery } from "@/shared/application/useMediaQuery";
 import { cn } from "@/lib/utils";
-import { formatCurrency, formatPercent } from "@/fund/presentation/fund.formatters";
+import { formatAmount, formatCurrency, formatPercent } from "@/fund/presentation/fund.formatters";
 import { toEur, formatBenefit } from "./portfolio.formatters";
 
 interface PortfolioItemRowProps {
@@ -72,7 +72,12 @@ export function PortfolioItemRow({ position, onBuy, onSell, onTransfer, onSeeDet
       <div className="flex items-center gap-3 px-4 py-3">
         <div className="flex flex-1 items-center gap-2 min-w-0">
           <ChartLine size={15} className="shrink-0 text-muted-foreground" />
-          <span className="truncate text-sm font-medium">{position.name}</span>
+          <div className="min-w-0">
+            <span className="truncate text-sm font-medium block">{position.name}</span>
+            <span className="text-xs text-muted-foreground">
+              {t("portfolio.units", { units: formatAmount(position.quantity, i18n.language) })}
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
