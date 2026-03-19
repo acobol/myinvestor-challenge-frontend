@@ -13,8 +13,8 @@ import type { SwipeAction } from "@/components/SwipeableRow";
 import { useMediaQuery } from "@/shared/application/useMediaQuery";
 import { cn } from "@/lib/utils";
 import { LinkButton } from "@/components/LinkButton";
-import { formatAmount, formatCurrency, formatPercent } from "@/fund/presentation/fund.formatters";
-import { toEur, formatBenefit } from "./portfolio.formatters";
+import { formatAmount, formatCurrency, formatPercent } from "@/fund/presentation/utils/fund.formatters";
+import { toEur, formatBenefit } from "../utils/portfolio.formatters";
 
 interface PortfolioItemRowProps {
   position: PortfolioPosition;

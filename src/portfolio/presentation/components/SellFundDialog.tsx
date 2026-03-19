@@ -5,7 +5,7 @@ import { useSellFund } from "@/portfolio/application/useSellFund";
 import { useRecordOrder } from "@/portfolio/application/useRecordOrder";
 import { calculateSaleProceeds } from "@/portfolio/application/fund-actions.utils";
 import { Dialog } from "@/components/Dialog";
-import { formatAmount, formatCurrency } from "@/fund/presentation/fund.formatters";
+import { formatAmount, formatCurrency } from "@/fund/presentation/utils/fund.formatters";
 import { SellFundForm } from "./SellFundForm";
 
 export interface SellFundDialogProps {

@@ -26,7 +26,7 @@ import {
 import { cn } from "@/lib/utils";
 import { SortIcon } from "@/components/SortIcon";
 import { LinkButton } from "@/components/LinkButton";
-import { formatAmount, formatPercent } from "./fund.formatters";
+import { formatAmount, formatPercent } from "../utils/fund.formatters";
 
 const columnHelper = createColumnHelper<Fund>();
 

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useFund } from "@/fund/application/useFund";
-import { FundDetailDialog } from "./FundDetailDialog";
+import { FundDetailDialog } from "../components/FundDetailDialog";
 
 export function useFundDetail() {
   const [detailFundId, setDetailFundId] = useState<string | null>(null);

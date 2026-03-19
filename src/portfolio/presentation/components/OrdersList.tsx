@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useOrders } from "@/portfolio/application/useOrders";
-import { useFundDetail } from "@/fund/presentation/useFundDetail";
+import { useFundDetail } from "@/fund/presentation/hooks/useFundDetail";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { OrderRow } from "./OrderRow";

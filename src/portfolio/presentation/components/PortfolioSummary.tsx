@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { PieChart, Pie, Cell } from "recharts";
 import { FUND_CATEGORIES } from "@/fund/domain/fund.constants";
-import { formatCurrency } from "@/fund/presentation/fund.formatters";
-import { toEur } from "@/portfolio/presentation/portfolio.formatters";
+import { formatCurrency } from "@/fund/presentation/utils/fund.formatters";
+import { toEur } from "@/portfolio/presentation/utils/portfolio.formatters";
 import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import {
   ChartContainer,

@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import { TransferFormSchema, type TransferFormValues } from "@/portfolio/domain/transfer-fund.schema";
-import { formatAmount } from "@/fund/presentation/fund.formatters";
+import { formatAmount } from "@/fund/presentation/utils/fund.formatters";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";

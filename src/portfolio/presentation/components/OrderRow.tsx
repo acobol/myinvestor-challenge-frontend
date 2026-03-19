@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import type { Order, OrderType } from "@/portfolio/domain/order.schema";
 import { Badge } from "@/components/ui/badge";
-import { formatCurrency, formatAmount } from "@/fund/presentation/fund.formatters";
-import { formatOrderDate } from "./order.formatters";
+import { formatCurrency, formatAmount } from "@/fund/presentation/utils/fund.formatters";
+import { formatOrderDate } from "../utils/order.formatters";
 import { ArrowRightLeft, ShoppingCart, TrendingDown } from "lucide-react";
 import { LinkButton } from "@/components/LinkButton";
 

@@ -3,8 +3,8 @@ import { useBuyFund } from "@/portfolio/application/useBuyFund";
 import { useRecordOrder } from "@/portfolio/application/useRecordOrder";
 import { toEur } from "@/shared/application/currency.utils";
 import { Dialog } from "@/components/Dialog";
-import { BuyFundForm } from "@/portfolio/presentation/BuyFundForm";
-import { formatAmount } from "@/fund/presentation/fund.formatters";
+import { BuyFundForm } from "./BuyFundForm";
+import { formatAmount } from "@/fund/presentation/utils/fund.formatters";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 

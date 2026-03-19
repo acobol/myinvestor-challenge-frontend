@@ -4,7 +4,7 @@ import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import { useTransferFund } from "@/portfolio/application/useTransferFund";
 import { useRecordOrder } from "@/portfolio/application/useRecordOrder";
 import { Dialog } from "@/components/Dialog";
-import { formatAmount } from "@/fund/presentation/fund.formatters";
+import { formatAmount } from "@/fund/presentation/utils/fund.formatters";
 import { TransferFundForm } from "./TransferFundForm";
 
 export interface TransferFundDialogProps {

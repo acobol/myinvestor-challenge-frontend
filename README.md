@@ -76,3 +76,8 @@ Por evaluar:
 - Añadir Storybook o similar para poder trabajar en los componentes de forma aislada y ver los cambios en tiempo real.
 - Revisar la parte de compra y venta de participaciones, al haber hecho la compra con divisa en lugar de número de participaciones hay algunos problemas derivados de la precisión de coma flotante de javascript
 - Haber trabajado en los test End to End, al haber podido dedicar solo pequeños ratos he tenido que sacrificar algunas ideas iniciales.
+- Mejorar el manejo de los modales, seguramente usando un Context que nos de las acciones de lanzarlas.
+- Cuando para mostrar los datos de la cartera hago un enriquecimiento de los datos haciendo llamadas para obetener la información de cada fondo se podría mejorar haciendo que no haya que esperar a todas las posiciones y que cada una se fuese pintando conforme tuviese la información.
+- Mejorar el visual de los errores.
+- En el formulario de comprar fondo añadir la opción de introducir el número de posiciones a comprar, de forma que el usuario pueda introducir o cantidad de dinero o número de posiciones.
+- Documentación de la estructura del proyecto.

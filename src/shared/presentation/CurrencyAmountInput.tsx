@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { formatCurrency } from "@/fund/presentation/fund.formatters";
+import { formatCurrency } from "@/fund/presentation/utils/fund.formatters";
 import { Input } from "@/components/ui/input";
 
 export interface CurrencyAmountInputProps {

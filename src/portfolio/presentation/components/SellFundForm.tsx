@@ -4,7 +4,7 @@ import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
 import { SellFormSchema, type SellFormValues } from "@/portfolio/domain/sell-fund.schema";
 import { EUR_USD_RATE } from "@/shared/domain/currency";
 import { calculateSaleProceeds } from "@/portfolio/application/fund-actions.utils";
-import { formatCurrency, formatAmount } from "@/fund/presentation/fund.formatters";
+import { formatCurrency, formatAmount } from "@/fund/presentation/utils/fund.formatters";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";

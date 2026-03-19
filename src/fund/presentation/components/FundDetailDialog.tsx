@@ -4,7 +4,7 @@ import type { Fund } from "@/fund/domain/fund.schema";
 import { Dialog } from "@/components/Dialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { formatCurrency, formatPercent } from "./fund.formatters";
+import { formatCurrency, formatPercent } from "../utils/fund.formatters";
 
 interface ProfitabilityRowProps {
   label: string;

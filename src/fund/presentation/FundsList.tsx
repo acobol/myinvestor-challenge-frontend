@@ -8,9 +8,9 @@ import { toApiSort } from "@/fund/application/fund.sort-utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageSizeSelector, TablePagination } from "@/components/TablePagination";
-import { FundsTable } from "./FundsTable";
-import { BuyFundDialog } from "@/portfolio/presentation/BuyFundDialog";
-import { useFundDetail } from "./useFundDetail";
+import { FundsTable } from "./components/FundsTable";
+import { BuyFundDialog } from "@/portfolio/presentation/components/BuyFundDialog";
+import { useFundDetail } from "./hooks/useFundDetail";
 
 const SKELETON_ROWS = 10;
 const SKELETON_COLS = 10;

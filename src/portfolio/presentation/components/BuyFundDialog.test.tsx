@@ -5,7 +5,7 @@ import { render } from "@/test/test-utils";
 import { fundsDb } from "@/mocks/data";
 import "@/i18n";
 import i18n from "@/i18n";
-import { BuyFundDialog } from "@/portfolio/presentation/BuyFundDialog";
+import { BuyFundDialog } from "@/portfolio/presentation/components/BuyFundDialog";
 import { Toaster } from "@/components/ui/sonner";
 import { EUR_USD_RATE } from "@/shared/domain/currency";
 import type { Fund } from "@/fund/domain/fund.schema";

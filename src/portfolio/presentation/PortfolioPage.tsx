@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { PortfolioList } from "./PortfolioList";
-import { OrdersList } from "./OrdersList";
+import { PortfolioList } from "./components/PortfolioList";
+import { OrdersList } from "./components/OrdersList";
 
 export function PortfolioPage() {
   const { t } = useTranslation();
