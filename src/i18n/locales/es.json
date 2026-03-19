@@ -83,6 +83,29 @@
         "invalid": "Introduce un número de participaciones válido"
       }
     },
+    "tabs": {
+      "positions": "Posiciones",
+      "orders": "Órdenes"
+    },
+    "orders": {
+      "title": "Órdenes",
+      "loading": "Cargando órdenes...",
+      "error": "No se pudieron cargar las órdenes. Inténtalo de nuevo.",
+      "retry": "Reintentar",
+      "empty": "No tienes órdenes registradas.",
+      "types": {
+        "BUY": "Compra",
+        "SELL": "Venta",
+        "TRANSFER": "Traspaso"
+      },
+      "date": "Fecha",
+      "type": "Tipo",
+      "fund": "Fondo",
+      "units": "Participaciones",
+      "price": "Precio unitario",
+      "amount": "Importe",
+      "destination": "Destino"
+    },
     "transfer": {
       "title": "Traspasar fondo",
       "fromLabel": "Desde",

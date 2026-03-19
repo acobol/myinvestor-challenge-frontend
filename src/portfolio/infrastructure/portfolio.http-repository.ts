@@ -1,7 +1,9 @@
 import type { PortfolioRepository } from "@/portfolio/domain/portfolio.port";
 import { PortfolioItemSchema } from "@/portfolio/domain/portfolio.schema";
 import type { PortfolioPosition } from "@/portfolio/domain/portfolio.schema";
+import type { Order } from "@/portfolio/domain/order.schema";
 import { FundResponseSchema } from "@/fund/domain/fund.schema";
+import { orderIdbRepository } from "./order.idb-repository";
 import { z } from "zod";
 
 const BASE_URL = "http://localhost:3000";
@@ -36,6 +38,10 @@ export const portfolioHttpRepository: PortfolioRepository = {
     return results
       .filter((r): r is PromiseFulfilledResult<PortfolioPosition> => r.status === "fulfilled")
       .map((r) => r.value);
+  },
+
+  async getOrders(): Promise<Order[]> {
+    return orderIdbRepository.getOrders();
   },
 
   async buyFund(fundId: string, quantity: number): Promise<void> {

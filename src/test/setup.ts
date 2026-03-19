@@ -1,8 +1,10 @@
+import "fake-indexeddb/auto";
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import { afterEach, beforeAll, afterAll } from "vitest";
 import { server } from "@/mocks/server";
 import { seedDatabase } from "@/mocks/data";
+import { orderIdbRepository } from "@/portfolio/infrastructure/order.idb-repository";
 
 // Sonner uses matchMedia for dark-mode detection; jsdom does not implement it.
 window.matchMedia = window.matchMedia ?? ((query: string) => ({
@@ -26,9 +28,10 @@ beforeAll(async () => {
   server.listen({ onUnhandledRequest: "error" });
 });
 
-afterEach(() => {
+afterEach(async () => {
   server.resetHandlers();
   cleanup();
+  await orderIdbRepository.clear();
 });
 
 afterAll(() => server.close());

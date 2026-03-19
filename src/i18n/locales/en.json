@@ -83,6 +83,29 @@
         "invalid": "Please enter a valid number of units"
       }
     },
+    "tabs": {
+      "positions": "Positions",
+      "orders": "Orders"
+    },
+    "orders": {
+      "title": "Orders",
+      "loading": "Loading orders...",
+      "error": "Failed to load orders. Please try again.",
+      "retry": "Retry",
+      "empty": "You have no orders yet.",
+      "types": {
+        "BUY": "Buy",
+        "SELL": "Sell",
+        "TRANSFER": "Transfer"
+      },
+      "date": "Date",
+      "type": "Type",
+      "fund": "Fund",
+      "units": "Units",
+      "price": "Unit price",
+      "amount": "Amount",
+      "destination": "Destination"
+    },
     "transfer": {
       "title": "Transfer Fund",
       "fromLabel": "From",

@@ -1,5 +1,7 @@
 import type { Fund } from "@/fund/domain/fund.schema";
 import { useBuyFund } from "@/portfolio/application/useBuyFund";
+import { useRecordOrder } from "@/portfolio/application/useRecordOrder";
+import { toEur } from "@/shared/application/currency.utils";
 import { Dialog } from "@/components/Dialog";
 import { BuyFundForm } from "./BuyFundForm";
 import { formatAmount } from "./fund.formatters";
@@ -14,6 +16,7 @@ export interface BuyFundDialogProps {
 export function BuyFundDialog({ fund, onClose }: BuyFundDialogProps) {
   const { t, i18n } = useTranslation();
   const { mutate, isPending, reset } = useBuyFund();
+  const recordOrder = useRecordOrder();
 
   function handleSubmit(quantity: number) {
     if (!fund) return;
@@ -21,6 +24,15 @@ export function BuyFundDialog({ fund, onClose }: BuyFundDialogProps) {
       { fundId: fund.id, quantity },
       {
         onSuccess: () => {
+          void recordOrder({
+            type: "BUY",
+            fundId: fund.id,
+            fundName: fund.name,
+            quantity,
+            pricePerUnit: fund.value.amount,
+            currency: fund.value.currency,
+            amountEur: toEur(quantity * fund.value.amount, fund.value.currency),
+          });
           toast.success(t("portfolio.buy.success"), {
             description: t("portfolio.buy.successDetail", {
               units: formatAmount(quantity, i18n.language),

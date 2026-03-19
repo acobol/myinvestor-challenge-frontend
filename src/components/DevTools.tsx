@@ -8,6 +8,7 @@ import {
   stopMsw,
   type ErrorEndpointId,
 } from "@/mocks/dev-tools";
+import { orderIdbRepository } from "@/portfolio/infrastructure/order.idb-repository";
 
 // ---- Persistence ----
 
@@ -135,6 +136,7 @@ export function DevTools() {
     const next = !mswDisabled;
     setMswDisabled(next);
     saveState({ activeErrors: [...activeErrors], noCache, mswDisabled: next });
+    await orderIdbRepository.clear();
     if (next) {
       stopMsw();
     } else {

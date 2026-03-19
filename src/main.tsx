@@ -10,11 +10,12 @@ const queryClient = new QueryClient();
 
 async function enableMocking() {
   if (!import.meta.env.DEV) return;
-  const [{ worker }, { seedDatabase }] = await Promise.all([
+  const [{ worker }, { seedDatabase }, { orderIdbRepository }] = await Promise.all([
     import("./mocks/browser"),
     import("./mocks/data"),
+    import("./portfolio/infrastructure/order.idb-repository"),
   ]);
-  await seedDatabase();
+  await Promise.all([seedDatabase(), orderIdbRepository.clear()]);
   try {
     const state = JSON.parse(localStorage.getItem("msw-dev-tools") ?? "{}") as {
       mswDisabled?: boolean;
