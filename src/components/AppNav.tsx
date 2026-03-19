@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
 import { LayoutList, Briefcase } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 const NAV_LINKS = [
   { to: "/funds", labelKey: "nav.funds" as const, icon: LayoutList },
@@ -32,7 +33,8 @@ export function AppNav() {
             {t(labelKey)}
           </NavLink>
         ))}
-        <div className="mt-2 border-t pt-2 flex justify-center">
+        <div className="mt-2 border-t pt-2 flex justify-center gap-1">
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </div>
@@ -64,7 +66,8 @@ export function MobileBottomNav() {
             {t(labelKey)}
           </NavLink>
         ))}
-        <div className="flex items-center justify-center px-2">
+        <div className="flex items-center justify-center gap-1 px-2">
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </div>

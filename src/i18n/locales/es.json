@@ -138,6 +138,12 @@
     },
     "theme": {
       "toggle": "Cambiar tema"
+    },
+    "language": {
+      "toggle": "Cambiar idioma",
+      "switchTo": "Cambiar a {{lang}}",
+      "es": "Español",
+      "en": "Inglés"
     }
   }
 }

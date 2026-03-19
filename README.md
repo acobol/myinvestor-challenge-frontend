@@ -31,7 +31,7 @@ Por evaluar:
 
 - Las acciones sobre los fondos se encuentran en el dominio del portfolio, la razón de esto es que aunque el recurso del api REST es /funds lo que se modifica es el portfolio, por lo que considero que es un lugar con más sentido en nuestra aplicación.
 - Arquitectura Hexagonal + Domain Driven Design: cada feature está separada y tiene su extrauctura de arquitectura hexagonal, de esta forma siempre que se quiere acceder a algo el orden de resolución es simple, buscar el dominio del que se necesita un recurso y luego buscar por el tipo de recurso según la arquitectura hexagonal. Escojo esta forma de estructurar porque asumo que es una aplicación autocontenida, si hablasemos de un monorepo donde puede haber distintas aplicaciones accediendo a los mismo dominios tal vez habría que tomar otra ruta, como tratar como capa de presentación y aplicación cada uno de los modulos del mono repo y tener el dominio y la infraestructura fuera.
-- Añadidas unas devtools que permiten manipular el comportamiento de MSW en el navegadorr, de forma que podemos invalidar caches, y simular errores sin cambiar código. Mejoras posibles: poder configurar el tipo de errores que devolver, que los endpoints se lean de los archivos de forma que todo sea automático o que se pueda hacer común y no requiera añadirlos a mano uno a uno.
+- Añadidas unas devtools que permiten manipular el comportamiento de MSW en el navegadorr, de forma que podemos invalidar caches, y simular errores sin cambiar código.
 - Los componentes atómicos o más generalistas agnósticos de dominio viven en la carpeta src/components, los componentes con conocimiento de dominio como puede ser el Input con el formateo de la divisa viven en la carpeta /src/shared, siguiendo la convención de nombres de la arquitectura hexagonal propuesta.
 - Para las ordenes no tenemos API, escojo ir por la opción de guardarlas en IndexedDB aunque inicialmente podría ser un poco overkill y con localStorage podría ser suficiente, pero en caso de querer ampliar las features con cosas como un filtrado o una búsqueda sería más adecuada IndexedDB.
 
@@ -55,8 +55,11 @@ Por evaluar:
 - i18n
 - Selector de temas
 - Nombre del fondo como link a la modal de ver detalles del fondo
+- Toggle de idioma
 
 ## Mejoras
 - Investigar alguna forma de poder añadir el swipe a la tabla de fondos también, por consistencia, aunque la diferencia de ser una tabla que tiene scroll lateral respecto a una lista de items limita las posibilidades.
 - Los detalles del fondo como un desplegable bajo el fondo en lugar de una modal puede ser interesante.
 - Para el Swipe he tomado la opción de comprobar el tamaño de la pantalla, pero eso solo no determina si estamos en mobile o no, habría que comprobar mejor si estamos en movil para mostrar el swipe o las acciones con el dropdown, por ejemplo en una tablet estamos en un entorno con accion táctil también y se podría ofrecer el Swipe también.
+- Cuando las acciones de compra, venta o traspason fallan se podría guardar los datos de la acción de forma que en la notificación del error al usuario se le pueda dar la opción de reintentar sin que tenga que volver a realizarla el usuario.
+- Las dev tools se pueden mejorar de forma que no hiciese falta añadir cada endpoint a mano cada vez que se añade uno nuevo.
