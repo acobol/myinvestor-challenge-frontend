@@ -5,14 +5,13 @@ import type { Order } from "@/portfolio/domain/order.schema";
 import { FundResponseSchema } from "@/fund/domain/fund.schema";
 import { orderIdbRepository } from "./order.idb-repository";
 import { z } from "zod";
-
-const BASE_URL = "http://localhost:3000";
+import { API_BASE_URL } from "@/shared/infrastructure/api.config";
 
 const PortfolioListResponseSchema = z.object({ data: z.array(PortfolioItemSchema) });
 
 export const portfolioHttpRepository: PortfolioRepository = {
   async getPortfolio(): Promise<PortfolioPosition[]> {
-    const res = await fetch(`${BASE_URL}/portfolio`);
+    const res = await fetch(`${API_BASE_URL}/portfolio`);
     if (!res.ok) throw new Error("Failed to fetch portfolio");
     const items = PortfolioListResponseSchema.parse(await res.json()).data;
 
@@ -22,7 +21,7 @@ export const portfolioHttpRepository: PortfolioRepository = {
     // Individual fund fetch errors are swallowed so partial results are still shown.
     const results = await Promise.allSettled(
       items.map(async (item) => {
-        const fundRes = await fetch(`${BASE_URL}/funds/${item.id}`);
+        const fundRes = await fetch(`${API_BASE_URL}/funds/${item.id}`);
         if (!fundRes.ok) throw new Error(`Fund ${item.id} not found`);
         const fund = FundResponseSchema.parse(await fundRes.json()).data;
         return {
@@ -45,7 +44,7 @@ export const portfolioHttpRepository: PortfolioRepository = {
   },
 
   async buyFund(fundId: string, quantity: number): Promise<void> {
-    const response = await fetch(`${BASE_URL}/funds/${fundId}/buy`, {
+    const response = await fetch(`${API_BASE_URL}/funds/${fundId}/buy`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity }),
@@ -57,7 +56,7 @@ export const portfolioHttpRepository: PortfolioRepository = {
   },
 
   async sellFund(fundId: string, quantity: number): Promise<void> {
-    const response = await fetch(`${BASE_URL}/funds/${fundId}/sell`, {
+    const response = await fetch(`${API_BASE_URL}/funds/${fundId}/sell`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity }),
@@ -69,7 +68,7 @@ export const portfolioHttpRepository: PortfolioRepository = {
   },
 
   async transferFund(fromFundId: string, toFundId: string, quantity: number): Promise<void> {
-    const response = await fetch(`${BASE_URL}/funds/transfer`, {
+    const response = await fetch(`${API_BASE_URL}/funds/transfer`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ fromFundId, toFundId, quantity }),

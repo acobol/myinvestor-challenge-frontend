@@ -4,7 +4,9 @@ import type { FundsQuery } from "@/fund/domain/fund.schema";
 import { FundsQuerySchema } from "@/fund/domain/fund.schema";
 import type { PortfolioItem } from "@/portfolio/domain/portfolio.schema";
 
-const BASE = "http://localhost:3000";
+import { API_BASE_URL } from "@/shared/infrastructure/api.config";
+
+const BASE = API_BASE_URL;
 
 // ---- Helpers ----
 

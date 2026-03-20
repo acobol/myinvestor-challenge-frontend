@@ -11,6 +11,7 @@ import { fundsDb } from "@/mocks/data";
 import "@/i18n";
 import i18n from "@/i18n";
 import { Toaster } from "@/components/ui/sonner";
+import { API_BASE_URL } from "@/shared/infrastructure/api.config";
 import { PortfolioList } from "./PortfolioList";
 
 // Polyfill HTMLDialogElement for jsdom (required by BuyFundDialog)
@@ -49,7 +50,7 @@ describe("PortfolioList", () => {
   describe("error state", () => {
     it("shows an error message when the API fails", async () => {
       server.use(
-        http.get("http://localhost:3000/portfolio", () =>
+        http.get(`${API_BASE_URL}/portfolio`, () =>
           HttpResponse.json({ message: "Internal Server Error" }, { status: 500 }),
         ),
       );
@@ -62,7 +63,7 @@ describe("PortfolioList", () => {
 
     it("shows a retry button on error", async () => {
       server.use(
-        http.get("http://localhost:3000/portfolio", () =>
+        http.get(`${API_BASE_URL}/portfolio`, () =>
           HttpResponse.json({ message: "Internal Server Error" }, { status: 500 }),
         ),
       );
@@ -93,7 +94,7 @@ describe("PortfolioList", () => {
 
     it("shows an empty message when the portfolio has no positions", async () => {
       server.use(
-        http.get("http://localhost:3000/portfolio", () =>
+        http.get(`${API_BASE_URL}/portfolio`, () =>
           HttpResponse.json({ data: [] }),
         ),
       );

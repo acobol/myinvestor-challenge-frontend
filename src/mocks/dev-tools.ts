@@ -1,7 +1,9 @@
 import { http, HttpResponse } from "msw";
 import { worker } from "./browser";
 
-const BASE = "http://localhost:3000";
+import { API_BASE_URL } from "@/shared/infrastructure/api.config";
+
+const BASE = API_BASE_URL;
 
 export const ERROR_ENDPOINTS = [
   {

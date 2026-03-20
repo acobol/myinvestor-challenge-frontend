@@ -5,6 +5,7 @@ import { render, screen, waitFor, within } from "@/test/test-utils";
 import { server } from "@/mocks/server";
 import { fundsDb } from "@/mocks/data";
 import i18n from "@/i18n";
+import { API_BASE_URL } from "@/shared/infrastructure/api.config";
 import { FundsList } from "./FundsList";
 
 beforeEach(() => {
@@ -45,7 +46,7 @@ describe("FundsList", () => {
   describe("error state", () => {
     it("shows an error message when the API fails", async () => {
       server.use(
-        http.get("http://localhost:3000/funds", () =>
+        http.get(`${API_BASE_URL}/funds`, () =>
           HttpResponse.json({ message: "Internal Server Error" }, { status: 500 }),
         ),
       );
@@ -58,7 +59,7 @@ describe("FundsList", () => {
 
     it("shows a retry button on error", async () => {
       server.use(
-        http.get("http://localhost:3000/funds", () =>
+        http.get(`${API_BASE_URL}/funds`, () =>
           HttpResponse.json({ message: "Internal Server Error" }, { status: 500 }),
         ),
       );

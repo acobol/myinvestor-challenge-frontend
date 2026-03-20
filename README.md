@@ -9,25 +9,77 @@ La prueba ha sido desarrollada en este entorno y no se ha probado que funcione c
 - **Node.js** >= 24.14.0
 - **npm** >= 11.9.0
 
+> Es necesario tener arrancado el servidor proporcionado en https://bitbucket.org/myinvestor/myinvestor-challenge/src/master/ para las pruebas en modo producción.
+
 ## Instalación
 
 ```bash
 npm install
 ```
 
+## Configuración
+
+La URL base de la API se configura mediante la variable de entorno `VITE_API_BASE_URL`. Vite la inyecta en tiempo de build, por lo que es accesible en el código vía `import.meta.env.VITE_API_BASE_URL`.
+
+| Fichero            | Propósito                                   | Valor por defecto              |
+| ------------------ | ------------------------------------------- | ------------------------------ |
+| `.env`             | Desarrollo (MSW mock server)                | `http://localhost:3000`        |
+| `.env.production`  | Build de producción (API real)              | _(crear según el entorno)_     |
+
+Para apuntar a otra URL en desarrollo basta con modificar `.env` o crear un fichero `.env.local` (ignorado por git) que lo sobreescriba:
+
+```bash
+# .env.local
+VITE_API_BASE_URL=http://localhost:4000
+```
+
+La centralización se realiza en `src/shared/infrastructure/api.config.ts`, que exporta `API_BASE_URL` con fallback a `http://localhost:3000` si la variable no está definida.
+
+## Ejecución
+
+### Desarrollo
+
+- Arrancar en modo desarrollo, lo que arranca la aplicación apuntando por defecto al servidor de mocks y muestra disponible las dev-tools:
+
+```bash
+npm run dev
+```
+
+- Arrancar en modo desarrollo pero apuntando al API de producción, lo que arranca la aplicación apuntando por defecto al servidor proporcionado para la prueba y sin dev-tools.
+
+```bash
+npm run dev:preview
+```
+
+### Producción
+
+Para arrancar la prueba en modo producción es necesario construir la aplicación:
+
+```bash
+npm run build
+```
+
+y levantar el servidor:
+
+```bash
+npm run preview
+```
+
+
 ## Scripts
 
-| Comando                   | Descripción                                           |
-| ------------------------- | ----------------------------------------------------- |
-| `npm run dev`             | Arranca el servidor de desarrollo Vite (MSW + seed)   |
-| `npm run build`           | Comprobación de tipos + build de producción            |
-| `npm run preview`         | Sirve el build de producción localmente                |
-| `npm run lint`            | Ejecuta ESLint                                        |
-| `npm test`                | Ejecuta los tests unitarios en modo watch (Vitest)    |
-| `npx vitest run`          | Ejecuta los tests unitarios una sola vez               |
-| `npm run test:e2e`        | Tests E2E con Playwright (headless)                   |
-| `npm run test:e2e:ui`     | Tests E2E con la UI de Playwright                     |
-| `npm run test:e2e:headed` | Tests E2E con navegador visible                       |
+| Comando                   | Descripción                                                 |
+| ------------------------- | ----------------------------------------------------------- |
+| `npm run dev`             | Arranca el servidor de desarrollo Vite (MSW + seed)         |
+| `npm run dev:preview`     | Arranca el servidor de desarrollo Vite en modo producción   |
+| `npm run build`           | Comprobación de tipos + build de producción                 |
+| `npm run preview`         | Sirve el build de producción localmente                     |
+| `npm run lint`            | Ejecuta ESLint                                              |
+| `npm test`                | Ejecuta los tests unitarios en modo watch (Vitest)          |
+| `npx vitest run`          | Ejecuta los tests unitarios una sola vez                    |
+| `npm run test:e2e`        | Tests E2E con Playwright (headless)                         |
+| `npm run test:e2e:ui`     | Tests E2E con la UI de Playwright                           |
+| `npm run test:e2e:headed` | Tests E2E con navegador visible                             |
 
 Para comprobar solo los tipos sin generar el build:
 
@@ -124,6 +176,8 @@ src/
 ├── shared/                            # Reutilizables entre contextos
 │   ├── domain/
 │   │   └── currency.ts                #   CURRENCIES, Currency, EUR_USD_RATE, CurrencySchema
+│   ├── infrastructure/
+│   │   └── api.config.ts              #   API_BASE_URL (lee VITE_API_BASE_URL con fallback)
 │   ├── application/
 │   │   ├── usePagination.ts           #   Estado genérico de paginación
 │   │   ├── currency.utils.ts          #   toEur(amount, currency)
@@ -323,6 +377,7 @@ Posibilidad de traspasar participaciones de un fondo a otro:
 - **Extracción de componentes comunes**: consolidar patrones repetidos entre páginas (estados de error, acciones, layouts) en componentes reutilizables.
 - **Precisión de coma flotante**: la compra y venta en divisa (en lugar de por número de participaciones) introduce errores de precisión con aritmética de punto flotante de JavaScript. Habría que revisar y aplicar redondeo controlado o una librería de precisión decimal.
 - **Mejora del tipado**: revisar los tipos de TypeScript en profundidad; es un área en la que tengo margen de mejora.
+- **Import dinámicos**: hacer uso de import dinámicos de forma que el bundle pueda optimizarse mejor y mejore el rendimiento de la aplicación.
 
 ### Testing
 
